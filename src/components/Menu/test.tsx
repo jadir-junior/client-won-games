@@ -39,4 +39,32 @@ describe('<Menu />', () => {
     expect(fullMenu.getAttribute('aria-hidden')).toBe('true')
     expect(fullMenu).toHaveStyle({ opacity: 0 })
   })
+
+  it('should show registerBox if user is not logged', () => {
+    renderWithTheme(<Menu />)
+
+    const myAccount = screen.queryByText(/my account/i)
+    const wishlist = screen.queryByText('/wishlist/i')
+    const logIn = screen.getByText(/log in now/i)
+    const register = screen.getByText(/sign up/i)
+
+    expect(myAccount).not.toBeInTheDocument()
+    expect(wishlist).not.toBeInTheDocument()
+    expect(logIn).toBeInTheDocument()
+    expect(register).toBeInTheDocument()
+  })
+
+  it('should show on menu nav wishlist and my account and register box hide', () => {
+    renderWithTheme(<Menu username="mick" />)
+
+    const myAccount = screen.getByText(/my account/i)
+    const wishlist = screen.getByText(/wishlist/i)
+    const logIn = screen.queryByText(/log in now/i)
+    const register = screen.queryByText(/sign up/i)
+
+    expect(myAccount).toBeInTheDocument()
+    expect(wishlist).toBeInTheDocument()
+    expect(logIn).not.toBeInTheDocument()
+    expect(register).not.toBeInTheDocument()
+  })
 })
