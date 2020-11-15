@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Banner /> should render the Banner 1`] = `
-.c4 {
+.c5 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -28,11 +28,15 @@ exports[`<Banner /> should render the Banner 1`] = `
   padding: 0.8rem 3.2rem;
 }
 
-.c4:hover {
+.c5:hover {
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
 
 .c0 {
+  position: relative;
+}
+
+.c1 {
   width: 100%;
   height: 23rem;
   background-color: #EAEAEA;
@@ -41,38 +45,54 @@ exports[`<Banner /> should render the Banner 1`] = `
   background-size: cover;
 }
 
-.c1 {
+.c2 {
   width: 100%;
   background-color: rgba(0,0,0,0.7);
   padding: 2.4rem;
 }
 
-.c2 {
+.c3 {
   font-size: 1.8rem;
   font-weight: 600;
   color: #FAFAFA;
 }
 
-.c3 {
+.c4 {
   color: #FAFAFA;
   font-size: 1.4rem;
   font-weight: 400;
   margin-bottom: 1.6rem;
 }
 
-.c3 strong {
+.c4 strong {
   color: #F231A5;
   font-weight: 600;
 }
 
+@media (max-width:1170px) {
+  .c0 .sc-gsTCUz {
+    right: 0;
+  }
+
+  .c0 .sc-gsTCUz::before {
+    display: none;
+  }
+}
+
 @media (min-width:768px) {
   .c0 {
-    height: 58rem;
+    box-shadow: 0 0.4rem 0.5rem 0 rgba(0,0,0,0.2);
   }
 }
 
 @media (min-width:768px) {
   .c1 {
+    height: 58rem;
+  }
+}
+
+@media (min-width:768px) {
+  .c2 {
     border-radius: 0 0 0.4rem 0.4rem;
     padding: 4.0rem;
     position: absolute;
@@ -82,36 +102,36 @@ exports[`<Banner /> should render the Banner 1`] = `
 }
 
 @media (min-width:768px) {
-  .c2 {
+  .c3 {
     font-size: 2.8rem;
   }
 }
 
 @media (min-width:768px) {
-  .c3 {
+  .c4 {
     font-size: 1.8rem;
   }
 }
 
 <div
-  class=""
+  class="c0"
 >
   <div
     aria-label="Defy death"
-    class="c0"
+    class="c1"
     role="img"
     src="https://source.unsplash.com/user/willianjusten/1042x580"
   />
   <div
-    class="c1"
+    class="c2"
   >
     <h2
-      class="c2"
+      class="c3"
     >
       Defy death
     </h2>
     <h3
-      class="c3"
+      class="c4"
     >
       <p>
         Play the new 
@@ -122,7 +142,7 @@ exports[`<Banner /> should render the Banner 1`] = `
       </p>
     </h3>
     <a
-      class="c4"
+      class="c5"
       href="/games/defy-death"
     >
       <span>
