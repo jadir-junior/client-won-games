@@ -15,7 +15,7 @@ export type GameCardProps = {
   ribbon?: string
   ribbonColor?: RibbonColors
   ribbonSize?: RibbonSizes
-  onFav: () => void
+  onFav?: () => void
 }
 
 const GameCard = ({
