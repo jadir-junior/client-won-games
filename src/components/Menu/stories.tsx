@@ -13,7 +13,7 @@ export const Desktop: Story = (args) => <Menu {...args} />
 Desktop.parameters = {
   layout: 'fullscreen',
   backgrounds: {
-    default: 'dark'
+    default: 'won-dark'
   }
 }
 
@@ -23,6 +23,6 @@ Mobile.parameters = {
   },
   layout: 'fullscreen',
   backgrounds: {
-    default: 'dark'
+    default: 'won-dark'
   }
 }
