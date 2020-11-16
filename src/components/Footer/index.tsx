@@ -5,7 +5,7 @@ import Logo from 'components/Logo'
 import * as S from './styles'
 
 const Footer = () => (
-  <S.Wrapper>
+  <S.Wrapper aria-label="Footer">
     <Logo color="black" />
     <S.Content>
       <S.Column>

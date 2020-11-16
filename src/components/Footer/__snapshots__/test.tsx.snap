@@ -68,6 +68,7 @@ exports[`<Footer /> should render 4 column topics 1`] = `
 }
 
 <footer
+  aria-label="Footer"
   class="c0"
 >
   <div
