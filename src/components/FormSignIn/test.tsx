@@ -12,11 +12,8 @@ describe('<FormSignIn />', () => {
 
   it('should render the form', () => {
     renderWithTheme(<FormSignIn />)
-    //verifique email
     expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument()
-    //verifique password
     expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument()
-    //verifique button
     expect(
       screen.getByRole('button', { name: /sign in now/i })
     ).toBeInTheDocument()
