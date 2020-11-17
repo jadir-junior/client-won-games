@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Heading from 'components/Heading'
 import Logo from 'components/Logo'
 import * as S from './styles'
@@ -11,7 +13,11 @@ const Auth = ({ title, children }: AuthProps) => (
   <S.Wrapper>
     <S.BannerBlock>
       <S.BannerContent>
-        <Logo id="logo" />
+        <Link href="/">
+          <a>
+            <Logo id="logo" />
+          </a>
+        </Link>
 
         <div>
           <Heading size="huge">All your favorite games in one place</Heading>
@@ -26,7 +32,11 @@ const Auth = ({ title, children }: AuthProps) => (
 
     <S.Content>
       <S.ContentWrapper>
-        <Logo id="content" size="large" color="black" />
+        <Link href="/">
+          <a>
+            <Logo id="content" size="large" color="black" />
+          </a>
+        </Link>
 
         <Heading color="black" lineLeft lineColor="secondary">
           {title}
