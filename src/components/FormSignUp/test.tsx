@@ -5,7 +5,9 @@ import FormSignUp from '.'
 
 describe('<FormSignUp />', () => {
   it('should render the FormSignUp', () => {
-    renderWithTheme(<FormSignUp />)
+    const { container } = renderWithTheme(<FormSignUp />)
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render the form', () => {
