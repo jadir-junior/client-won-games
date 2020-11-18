@@ -5,6 +5,12 @@ import userEvent from '@testing-library/user-event'
 import Checkbox from '.'
 
 describe('<Checkbox />', () => {
+  it('should render the Checkbox', () => {
+    const { container } = renderWithTheme(<Checkbox />)
+
+    expect(container.firstChild).toMatchSnapshot()
+  })
+
   it('should render the Checkbox and label', () => {
     renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
 
