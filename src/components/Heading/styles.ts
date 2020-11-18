@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 import media from 'styled-media-query'
 import { HeadingProps, LineColorProps } from '.'
 
-const wrapperModifier = {
+export const wrapperModifier = {
   lineLeft: (theme: DefaultTheme, lineColor: LineColorProps) => css`
     padding-left: ${theme.spacings.xxsmall};
     border-left: 0.7rem solid ${theme.colors[lineColor]};
@@ -30,8 +30,8 @@ const wrapperModifier = {
     font-size: ${theme.font.sizes.xlarge};
 
     ${media.greaterThan('medium')`
-        font-size: ${theme.font.sizes.xxlarge}
-    `};
+        font-size: ${theme.font.sizes.xxlarge};
+    `}
   `,
   huge: (theme: DefaultTheme) => css`
     font-size: ${theme.font.sizes.huge};
