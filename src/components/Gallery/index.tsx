@@ -97,8 +97,10 @@ const Gallery = ({ items }: GalleryProps) => {
           aria-label="close modal"
           role="button"
           onClick={() => setIsOpen(false)}
-        ></S.Close>
-        <CloseIcon size={40} />
+        >
+          <CloseIcon size={40} />
+        </S.Close>
+
         <S.Content>
           <Slider ref={slider} settings={modalSliderSettings}>
             {items.map((item, index) => (

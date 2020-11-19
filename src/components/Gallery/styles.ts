@@ -53,7 +53,7 @@ const modalModifiers = {
 }
 
 export const Modal = styled.div<ModalProps>`
-  ${({ isOpen, theme }) => css`
+  ${({ theme, isOpen }) => css`
     position: fixed;
     width: 100%;
     height: 100%;
@@ -85,6 +85,6 @@ export const Close = styled.div`
 `
 
 export const Content = styled.div`
-  max-width: min-content(120rem, 100%);
+  max-width: min(120rem, 100%);
   max-height: 80rem;
 `
