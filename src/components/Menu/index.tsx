@@ -28,12 +28,18 @@ const Menu = ({ username }: MenuProps) => {
       </MediaMatch>
 
       <S.LogoWrapper>
-        <Logo hideOnMobile />
+        <Link href="/">
+          <a>
+            <Logo hideOnMobile />
+          </a>
+        </Link>
       </S.LogoWrapper>
 
       <MediaMatch greaterThan="medium">
         <S.MenuNav>
-          <S.MenuLink href="#">Home</S.MenuLink>
+          <Link href="/">
+            <S.MenuLink>Home</S.MenuLink>
+          </Link>
           <S.MenuLink href="#">Explorer</S.MenuLink>
         </S.MenuNav>
       </MediaMatch>
@@ -61,7 +67,9 @@ const Menu = ({ username }: MenuProps) => {
         ></CloseIcon>
 
         <S.MenuNav>
-          <S.MenuLink href="#">Home</S.MenuLink>
+          <Link href="/">
+            <S.MenuLink>Home</S.MenuLink>
+          </Link>
           <S.MenuLink href="#">Explorer</S.MenuLink>
 
           {!!username && (
