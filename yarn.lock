@@ -2269,7 +2269,7 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@storybook/addon-actions@6.1.8":
+"@storybook/addon-actions@6.1.8", "@storybook/addon-actions@6.x":
   version "6.1.8"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.1.8.tgz#b1a74710daaac8846df539590ff1152d7a18cdb8"
   integrity sha512-G2dhFdJ3xzhmduI3UJDwsJ0hg565Axm7Yux8zzPjqk+o61PPVUtvwdOalYA2XPSn5LN0S9McYBn4uq4SqaxgMw==
@@ -2416,7 +2416,7 @@
     prop-types "^15.7.2"
     regenerator-runtime "^0.13.7"
 
-"@storybook/addons@6.1.8":
+"@storybook/addons@6.1.8", "@storybook/addons@6.x":
   version "6.1.8"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-6.1.8.tgz#5efef0d3da0970589c948a89a273a9650111c7f7"
   integrity sha512-cqYfE7F5g4lY4E2djLj4KmOVdIm7dCc8TSgfMbYb5WmO4Ow74Nx2aO/51qpz8cM+EHj2HodK05vTntlcLom5Hg==
@@ -13105,6 +13105,14 @@ store2@^2.7.1:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.12.0.tgz#e1f1b7e1a59b6083b2596a8d067f6ee88fd4d3cf"
   integrity sha512-7t+/wpKLanLzSnQPX8WAcuLCCeuSHoWdQuh9SB3xD0kNOM38DNf+0Oa+wmvxmYueRzkmh6IcdKFtvTa+ecgPDw==
+
+storybook-addon-next-router@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/storybook-addon-next-router/-/storybook-addon-next-router-2.0.0.tgz#2c0a20c678f64d8817af2a8eb1e60cb0d5440fd1"
+  integrity sha512-g2WJOKqAzB5w8lacv8nH47qYBzGeCdiIYuGZ/ov9VvpNbG5h52lUvP0msMUqsy4QQcXBt0z08SHdq+2tJVhGtA==
+  dependencies:
+    "@storybook/addon-actions" "6.x"
+    "@storybook/addons" "6.x"
 
 stream-browserify@3.0.0:
   version "3.0.0"
