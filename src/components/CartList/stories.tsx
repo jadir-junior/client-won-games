@@ -4,7 +4,7 @@ import mockCartListIrems from './mock'
 import CartList, { CartListProps } from '.'
 
 export default {
-  title: 'CartList',
+  title: 'cart/CartList',
   component: CartList,
   parameters: {
     backgrounds: {
