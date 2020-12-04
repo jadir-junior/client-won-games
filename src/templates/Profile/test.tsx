@@ -5,6 +5,12 @@ import Profile from '.'
 
 describe('<Profile />', () => {
   it('should render the Profile', () => {
-    renderWithTheme(<Profile />)
+    const { container } = renderWithTheme(
+      <Profile>
+        <div>children</div>
+      </Profile>
+    )
+
+    expect(container.firstChild).toBeInTheDocument()
   })
 })
