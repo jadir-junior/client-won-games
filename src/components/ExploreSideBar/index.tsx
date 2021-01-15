@@ -1,5 +1,6 @@
 import * as S from './styles'
 
+import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import Heading from 'components/Heading'
 import Radio from 'components/Radio'
@@ -87,6 +88,10 @@ const ExploreSideBar = () => (
       labelColor="white"
     />
     <Checkbox name="fps" label="FPS" labelFor="fps" labelColor="white" />
+
+    <Button fullWidth size="medium">
+      Filter
+    </Button>
   </S.Wrapper>
 )
 

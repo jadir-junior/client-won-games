@@ -28,4 +28,10 @@ describe('<ExploreSideBar />', () => {
       screen.getByRole('radio', { name: /high to low/i })
     ).toBeInTheDocument()
   })
+
+  it('should render a filter button', () => {
+    renderWithTheme(<ExploreSideBar />)
+
+    expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
+  })
 })
