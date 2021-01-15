@@ -5,9 +5,56 @@ import Checkbox from 'components/Checkbox'
 import Heading from 'components/Heading'
 import Radio from 'components/Radio'
 
-const ExploreSideBar = () => (
+export type ItemProps = {
+  title: string
+  name: string
+  type: string
+  fields: Field[]
+}
+
+type Field = {
+  label: string
+  name: string
+}
+
+export type ExploreSideBarProps = {
+  items: ItemProps[]
+}
+
+const ExploreSideBar = ({ items }: ExploreSideBarProps) => (
   <S.Wrapper>
-    <Heading lineBottom lineColor="secondary" size="small">
+    {items.map((item) => (
+      <div key={item.name}>
+        <Heading lineBottom lineColor="secondary" size="small">
+          {item.title}
+        </Heading>
+
+        {item.type === 'checkbox' &&
+          item.fields.map((field) => (
+            <Checkbox
+              key={field.name}
+              name={field.name}
+              label={field.label}
+              labelFor={field.name}
+              labelColor="white"
+            />
+          ))}
+
+        {item.type === 'radio' &&
+          item.fields.map((field) => (
+            <Radio
+              key={field.name}
+              label={field.label}
+              labelFor={field.name}
+              labelColor="white"
+              id={field.name}
+              name={item.name}
+              value={field.name}
+            />
+          ))}
+      </div>
+    ))}
+    {/* <Heading lineBottom lineColor="secondary" size="small">
       Price
     </Heading>
     <Checkbox
@@ -87,7 +134,7 @@ const ExploreSideBar = () => (
       labelFor="adventure"
       labelColor="white"
     />
-    <Checkbox name="fps" label="FPS" labelFor="fps" labelColor="white" />
+    <Checkbox name="fps" label="FPS" labelFor="fps" labelColor="white" /> */}
 
     <Button fullWidth size="medium">
       Filter
