@@ -4,6 +4,7 @@ import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import Heading from 'components/Heading'
 import Radio from 'components/Radio'
+import { useState } from 'react'
 
 export type ItemProps = {
   title: string
@@ -17,129 +18,74 @@ type Field = {
   name: string
 }
 
-export type ExploreSideBarProps = {
-  items: ItemProps[]
+type Values = {
+  [field: string]: boolean | string
 }
 
-const ExploreSideBar = ({ items }: ExploreSideBarProps) => (
-  <S.Wrapper>
-    {items.map((item) => (
-      <div key={item.name}>
-        <Heading lineBottom lineColor="secondary" size="small">
-          {item.title}
-        </Heading>
+export type ExploreSideBarProps = {
+  items: ItemProps[]
+  initialValues?: Values
+  onFilter: (values: Values) => void
+}
 
-        {item.type === 'checkbox' &&
-          item.fields.map((field) => (
-            <Checkbox
-              key={field.name}
-              name={field.name}
-              label={field.label}
-              labelFor={field.name}
-              labelColor="white"
-            />
-          ))}
+const ExploreSideBar = ({
+  items,
+  onFilter,
+  initialValues = {}
+}: ExploreSideBarProps) => {
+  const [values, setValues] = useState(initialValues)
 
-        {item.type === 'radio' &&
-          item.fields.map((field) => (
-            <Radio
-              key={field.name}
-              label={field.label}
-              labelFor={field.name}
-              labelColor="white"
-              id={field.name}
-              name={item.name}
-              value={field.name}
-            />
-          ))}
-      </div>
-    ))}
-    {/* <Heading lineBottom lineColor="secondary" size="small">
-      Price
-    </Heading>
-    <Checkbox
-      name="under-50"
-      label="Under $50"
-      labelFor="under-50"
-      labelColor="white"
-    />
-    <Checkbox
-      name="under-100"
-      label="Under $100"
-      labelFor="under-100"
-      labelColor="white"
-    />
-    <Checkbox
-      name="under-150"
-      label="Under $150"
-      labelFor="under-150"
-      labelColor="white"
-    />
-    <Checkbox
-      name="under-200"
-      label="Under $200"
-      labelFor="under-200"
-      labelColor="white"
-    />
-    <Checkbox name="free" label="Free" labelFor="free" labelColor="white" />
-    <Checkbox
-      name="discounted"
-      label="Discounted"
-      labelFor="discounted"
-      labelColor="white"
-    />
+  const handleChange = (name: string, value: string | boolean) => {
+    setValues((previousValue) => ({ ...previousValue, [name]: value }))
+  }
 
-    <Heading lineBottom lineColor="secondary" size="small">
-      Sort by
-    </Heading>
-    <Radio
-      label="High to low"
-      labelFor="high-to-low"
-      labelColor="white"
-      id="high-to-low"
-      name="sort-by"
-      value="high-to-low"
-    />
-    <Radio
-      label="Low to high"
-      labelFor="low-to-high"
-      labelColor="white"
-      id="low-to-high"
-      name="sort-by"
-      value="low-to-high"
-    />
-    <Heading lineBottom lineColor="secondary" size="small">
-      System
-    </Heading>
-    <Checkbox
-      name="windows"
-      label="Windows"
-      labelFor="windows"
-      labelColor="white"
-    />
-    <Checkbox name="linux" label="Linux" labelFor="linux" labelColor="white" />
-    <Checkbox name="mac" label="MAC" labelFor="mac" labelColor="white" />
-    <Heading lineBottom lineColor="secondary" size="small">
-      Genre
-    </Heading>
-    <Checkbox
-      name="action"
-      label="Action"
-      labelFor="action"
-      labelColor="white"
-    />
-    <Checkbox
-      name="adventure"
-      label="Adventure"
-      labelFor="adventure"
-      labelColor="white"
-    />
-    <Checkbox name="fps" label="FPS" labelFor="fps" labelColor="white" /> */}
+  const handleFilter = () => {
+    onFilter(values)
+  }
 
-    <Button fullWidth size="medium">
-      Filter
-    </Button>
-  </S.Wrapper>
-)
+  return (
+    <S.Wrapper>
+      {items.map((item) => (
+        <div key={item.name}>
+          <Heading lineBottom lineColor="secondary" size="small">
+            {item.title}
+          </Heading>
+
+          {item.type === 'checkbox' &&
+            item.fields.map((field) => (
+              <Checkbox
+                key={field.name}
+                name={field.name}
+                label={field.label}
+                labelFor={field.name}
+                labelColor="white"
+                isChecked={!!values[field.name]}
+                onCheck={(value) => handleChange(field.name, value)}
+              />
+            ))}
+
+          {item.type === 'radio' &&
+            item.fields.map((field) => (
+              <Radio
+                key={field.name}
+                id={field.name}
+                value={field.name}
+                name={item.name}
+                label={field.label}
+                labelFor={field.name}
+                labelColor="white"
+                defaultChecked={field.name === values[item.name]}
+                onChange={() => handleChange(item.name, field.name)}
+              />
+            ))}
+        </div>
+      ))}
+
+      <Button fullWidth size="medium" onClick={handleFilter}>
+        Filter
+      </Button>
+    </S.Wrapper>
+  )
+}
 
 export default ExploreSideBar
