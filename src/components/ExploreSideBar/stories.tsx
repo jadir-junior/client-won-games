@@ -6,11 +6,6 @@ import items from './mock'
 export default {
   title: 'ExploreSideBar',
   component: ExploreSideBar,
-  argTypes: {
-    onClick: {
-      action: 'clicked'
-    }
-  },
   args: {
     items
   },
@@ -22,12 +17,16 @@ export default {
 } as Meta
 
 export const Default: Story<ExploreSideBarProps> = (args) => (
-  <ExploreSideBar {...args} />
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSideBar {...args} />
+  </div>
 )
 
 export const withInitialValues: Story<ExploreSideBarProps> = (args) => (
-  <ExploreSideBar
-    {...args}
-    initialValues={{ windows: true, sort_by: 'high-to-low' }}
-  />
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSideBar
+      initialValues={{ windows: true, sort_by: 'high-to-low' }}
+      {...args}
+    />
+  </div>
 )

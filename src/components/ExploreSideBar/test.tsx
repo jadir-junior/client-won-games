@@ -1,4 +1,6 @@
 import ExploreSideBar from '.'
+import { Overlay } from './styles'
+import { css } from 'styled-components'
 import items from './mock'
 import { renderWithTheme } from 'utils/tests/helpers'
 import { screen } from '@testing-library/react'
@@ -99,5 +101,32 @@ describe('<ExploreSideBar />', () => {
     expect(onFilter).toBeCalledWith({
       sort_by: 'high-to-low'
     })
+  })
+
+  it('should open/close sidebar wehn filtering on mobile', () => {
+    const { container } = renderWithTheme(
+      <ExploreSideBar items={items} onFilter={jest.fn} />
+    )
+
+    const variant = {
+      media: '(max-width: 768px)',
+      modifier: String(
+        css`
+          ${Overlay}
+        `
+      )
+    }
+
+    const Element = container.firstChild
+
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
+
+    userEvent.click(screen.getByLabelText(/open filters/))
+
+    expect(Element).toHaveStyleRule('opacity', '1', variant)
+
+    userEvent.click(screen.getByLabelText(/close filters/))
+
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
   })
 })
