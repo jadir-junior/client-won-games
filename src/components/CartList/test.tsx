@@ -1,9 +1,7 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
-
 import CartList from '.'
-
 import mockCartListItems from './mock'
+import { renderWithTheme } from 'utils/tests/helpers'
+import { screen } from '@testing-library/react'
 
 describe('<CartList />', () => {
   it('should render the CardList', () => {
@@ -28,5 +26,14 @@ describe('<CartList />', () => {
     expect(screen.getByText('R$ 330,00')).toHaveStyle({
       color: '#F231A5'
     })
+  })
+
+  it('should render with a button', () => {
+    renderWithTheme(
+      <CartList items={mockCartListItems} total="R$ 330,00" hasButton />
+    )
+
+    expect(screen.getByText(/buy it now/i)).toBeInTheDocument()
+    expect(screen.queryByText(/total/i)).not.toBeInTheDocument()
   })
 })

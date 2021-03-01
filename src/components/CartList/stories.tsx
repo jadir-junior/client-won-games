@@ -1,7 +1,7 @@
-import { Story, Meta } from '@storybook/react/types-6-0'
-import mockCartListIrems from './mock'
-
 import CartList, { CartListProps } from '.'
+import { Meta, Story } from '@storybook/react/types-6-0'
+
+import mockCartListIrems from './mock'
 
 export default {
   title: 'cart/CartList',
@@ -20,5 +20,11 @@ export default {
 export const Default: Story<CartListProps> = (args) => (
   <div style={{ maxWidth: 800 }}>
     <CartList {...args} />
+  </div>
+)
+
+export const WithButton: Story<CartListProps> = (args) => (
+  <div style={{ maxWidth: 800 }}>
+    <CartList {...args} hasButton />
   </div>
 )
