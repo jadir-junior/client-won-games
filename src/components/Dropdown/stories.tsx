@@ -1,6 +1,5 @@
+import Dropdown, { DropdownProps } from '.'
 import { Meta, Story } from '@storybook/react/types-6-0'
-
-import Dropdown from '.'
 
 export default {
   title: 'Dropdown',
@@ -12,9 +11,9 @@ export default {
   }
 } as Meta
 
-export const Default: Story = (args) => <Dropdown {...args} />
+export const Default: Story<DropdownProps> = (args) => <Dropdown {...args} />
 
 Default.args = {
-  title: 'Title',
+  title: 'Click here!',
   children: 'Content'
 }
