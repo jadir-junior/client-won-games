@@ -1,19 +1,19 @@
 import { fireEvent, screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
 
 import Menu from '.'
+import { renderWithTheme } from 'utils/tests/helpers'
 
 describe('<Menu />', () => {
   it('should render the menu', () => {
     renderWithTheme(<Menu />)
     const search = screen.getByLabelText(/search/i)
-    const shoppingCart = screen.getByLabelText(/open shopping cart/i)
+    const shoppingCart = screen.getAllByLabelText(/shopping cart/i)
     const logo = screen.getByLabelText(/won games/i)
     const menuIcon = screen.getByLabelText(/open menu/i)
 
     expect(menuIcon).toBeInTheDocument()
     expect(search).toBeInTheDocument()
-    expect(shoppingCart).toBeInTheDocument()
+    expect(shoppingCart).toHaveLength(2)
     expect(logo).toBeInTheDocument()
   })
 
@@ -43,7 +43,7 @@ describe('<Menu />', () => {
   it('should show registerBox if user is not logged', () => {
     renderWithTheme(<Menu />)
 
-    const myAccount = screen.queryByText(/my account/i)
+    const myAccount = screen.queryByText(/my profile/i)
     const wishlist = screen.queryByText('/wishlist/i')
     const logIn = screen.getByText(/log in now/i)
     const register = screen.getByText(/sign up/i)
@@ -57,13 +57,13 @@ describe('<Menu />', () => {
   it('should show on menu nav wishlist and my account and register box hide', () => {
     renderWithTheme(<Menu username="mick" />)
 
-    const myAccount = screen.getByText(/my account/i)
-    const wishlist = screen.getByText(/wishlist/i)
+    const myAccount = screen.getAllByText(/my profile/i)
+    const wishlist = screen.getAllByText(/wishlist/i)
     const logIn = screen.queryByText(/log in now/i)
     const register = screen.queryByText(/sign up/i)
 
-    expect(myAccount).toBeInTheDocument()
-    expect(wishlist).toBeInTheDocument()
+    expect(myAccount).toHaveLength(2)
+    expect(wishlist).toHaveLength(2)
     expect(logIn).not.toBeInTheDocument()
     expect(register).not.toBeInTheDocument()
   })
