@@ -1,11 +1,15 @@
 import * as S from './styles'
-import { FavoriteBorder as FavoriteBorderIcon } from '@styled-icons/material-outlined/FavoriteBorder'
-import { Favorite as FavoriteIcon } from '@styled-icons/material-outlined/Favorite'
-import { AddShoppingCart as AddShoppingCartIcon } from '@styled-icons/material-outlined/AddShoppingCart'
-import Button from 'components/Button'
+
 import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 
+import { AddShoppingCart as AddShoppingCartIcon } from '@styled-icons/material-outlined/AddShoppingCart'
+import Button from 'components/Button'
+import { FavoriteBorder as FavoriteBorderIcon } from '@styled-icons/material-outlined/FavoriteBorder'
+import { Favorite as FavoriteIcon } from '@styled-icons/material-outlined/Favorite'
+import Link from 'next/link'
+
 export type GameCardProps = {
+  slug: string
   title: string
   developer: string
   img: string
@@ -19,6 +23,7 @@ export type GameCardProps = {
 }
 
 const GameCard = ({
+  slug,
   title,
   developer,
   img,
@@ -36,14 +41,18 @@ const GameCard = ({
         {ribbon}
       </Ribbon>
     )}
-    <S.ImageBox>
-      <img src={img} alt={title} />
-    </S.ImageBox>
+    <Link href={`game/${slug}`} passHref>
+      <S.ImageBox>
+        <img src={img} alt={title} />
+      </S.ImageBox>
+    </Link>
     <S.Content>
-      <S.Info>
-        <S.Title>{title}</S.Title>
-        <S.Developer>{developer}</S.Developer>
-      </S.Info>
+      <Link href={`game/${slug}`}>
+        <S.Info>
+          <S.Title>{title}</S.Title>
+          <S.Developer>{developer}</S.Developer>
+        </S.Info>
+      </Link>
       <S.FavIcon role="button" onClick={onFav}>
         {favorite ? (
           <FavoriteIcon aria-label="Remove from Wishlist" />
