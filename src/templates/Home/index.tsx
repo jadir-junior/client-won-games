@@ -9,7 +9,6 @@ import { HighlightProps } from 'components/Highlight'
 import Showcase from 'components/Showcase'
 
 export type HomeTemplateProps = {
-  data: any
   banners: BannerProps[]
   newGames: GameCardProps[]
   mostPopularHighLight: HighlightProps
