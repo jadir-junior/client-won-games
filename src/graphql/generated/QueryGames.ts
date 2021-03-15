@@ -29,3 +29,7 @@ export interface QueryGames_games {
 export interface QueryGames {
   games: QueryGames_games[];
 }
+
+export interface QueryGamesVariables {
+  limit: number;
+}
