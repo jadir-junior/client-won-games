@@ -1,12 +1,11 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
-
 import GameInfo from '.'
+import { renderWithTheme } from 'utils/tests/helpers'
+import { screen } from '@testing-library/react'
 
 const props = {
   title: 'Title',
   description: 'Description',
-  price: '200.00'
+  price: 200
 }
 
 describe('<GameInfo />', () => {
@@ -21,7 +20,7 @@ describe('<GameInfo />', () => {
 
     expect(screen.getByRole('heading', { name: /title/i })).toBeInTheDocument()
     expect(screen.getByText(/description/i)).toBeInTheDocument()
-    expect(screen.getByText('200.00')).toBeInTheDocument()
+    expect(screen.getByText('$200.00')).toBeInTheDocument()
   })
 
   it('should render the buttons', () => {

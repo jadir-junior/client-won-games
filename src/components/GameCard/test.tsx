@@ -2,13 +2,14 @@ import { fireEvent, screen } from '@testing-library/react'
 
 import GameCard from '.'
 import { renderWithTheme } from 'utils/tests/helpers'
+import theme from 'styles/theme'
 
 const props = {
   slug: 'population-zero',
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: 'https://source.unsplash.com/user/willianjusten/300x140',
-  price: 'R$ 200,00'
+  price: 235
 }
 
 describe('<GameCard />', () => {
@@ -27,27 +28,29 @@ describe('<GameCard />', () => {
     ).toBeInTheDocument()
     expect(screen.getByRole('img', { name: props.title })).toBeInTheDocument()
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
-    expect(screen.getByText(props.price)).toBeInTheDocument()
+    expect(screen.getByText('$235.00')).toBeInTheDocument()
   })
 
   it('should render price in label', () => {
     renderWithTheme(<GameCard {...props} />)
 
-    expect(screen.getByText(props.price)).not.toHaveStyle({
+    const price = screen.getByText('$235.00')
+
+    expect(price).not.toHaveStyle({
       textDecoration: 'line-through'
     })
-    expect(screen.getByText(props.price)).toHaveStyle({
-      backgroundColor: '#3CD3C1'
+    expect(price).toHaveStyle({
+      backgroundColor: theme.colors.secondary
     })
   })
 
   it('should render a line-through in price when promotional', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 15,00" />)
+    renderWithTheme(<GameCard {...props} promotionalPrice={15} />)
 
-    expect(screen.getByText(props.price)).toHaveStyle({
+    expect(screen.getByText('$235.00')).toHaveStyle({
       textDecoration: 'line-through'
     })
-    expect(screen.getByText('R$ 15,00')).not.toHaveStyle({
+    expect(screen.getByText('$15.00')).not.toHaveStyle({
       textDecoration: 'line-through'
     })
   })
