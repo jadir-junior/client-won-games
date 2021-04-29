@@ -2,7 +2,6 @@ import Home, { HomeTemplateProps } from 'templates/Home'
 
 import { QUERY_HOME } from 'graphql/queries/home'
 import { QueryHome } from 'graphql/generated/QueryHome'
-import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import { initializeApollo } from 'utils/apollo'
@@ -15,7 +14,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo()
 
   const {
-    data: { banners, newGames }
+    data: { banners, newGames, upComingGames }
   } = await apolloClient.query<QueryHome>({
     query: QUERY_HOME
   })
@@ -44,26 +43,16 @@ export async function getStaticProps() {
       })),
       mostPopularHighLight: highlightMock,
       mostPopularGames: gamesMock,
-      upComingGames: gamesMock,
+      upComingGames: upComingGames.map((game) => ({
+        title: game.name,
+        slug: game.slug,
+        img: `http://localhost:1337${game.cover?.url}`,
+        developer: game.developers[0].name,
+        price: game.price
+      })),
       upComingHighLight: highlightMock,
-      upComingMoreGames: gamesMock,
       freeGames: gamesMock,
       freeGamesHighLight: highlightMock
     }
   }
 }
-
-// name: string;
-// slug: string;
-// cover: QueryHome_newGames_cover | null;
-// developers: QueryHome_newGames_developers[];
-// price: number;
-
-// {
-//   title: 'Population Zero',
-//   slug: 'population-zero',
-//   developer: 'Rockstar Games',
-//   img: 'https://source.unsplash.com/user/willianjusten/300x140',
-//   price: 235,
-//   promotionalPrice: 215
-// },
