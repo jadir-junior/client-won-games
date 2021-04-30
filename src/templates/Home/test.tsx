@@ -9,12 +9,15 @@ import { screen } from '@testing-library/react'
 
 const props = {
   banners: bannersMock,
+  newGamesTitle: 'New Games',
   newGames: [gamesMock[0]],
+  mostPopularTitle: 'Most Popular',
   mostPopularHighLight: highlightMock,
   mostPopularGames: [gamesMock[0]],
+  upComingTitle: 'Upcoming',
   upComingGames: [gamesMock[0]],
   upComingHighLight: highlightMock,
-  upComingMoreGames: [gamesMock[0]],
+  freeGamesTitle: 'Free Games',
   freeGames: [gamesMock[0]],
   freeGamesHighLight: highlightMock
 }
