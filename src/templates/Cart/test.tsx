@@ -1,16 +1,18 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
 
+import Cart from '.'
+import cardsMock from 'components/PaymentOptions/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import itemsMock from 'components/CartList/mock'
-import cardsMock from 'components/PaymentOptions/mock'
+import { renderWithTheme } from 'utils/tests/helpers'
+import { screen } from '@testing-library/react'
 
 const props = {
   items: itemsMock,
   total: '$ 400,00',
   cards: cardsMock,
+  recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock,
   recommendedHighlight: highlightMock
 }
@@ -49,8 +51,6 @@ jest.mock('components/Empty', () => ({
     return <div data-testid="Mock Empty"></div>
   }
 }))
-
-import Cart from '.'
 
 describe('<Cart />', () => {
   it('should render the Cart', () => {

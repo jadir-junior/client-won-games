@@ -1,16 +1,15 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
-
-import { GameDetailsProps } from 'components/GameDetails'
-
-import gameInfoMock from 'components/GameInfo/mock'
-import galleryMock from 'components/Gallery/mock'
-import detailsMock from 'components/GameDetails/mock'
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 
 import Game, { GameTemplateProps } from '.'
+
+import { GameDetailsProps } from 'components/GameDetails'
+import detailsMock from 'components/GameDetails/mock'
+import galleryMock from 'components/Gallery/mock'
+import gameInfoMock from 'components/GameInfo/mock'
+import gamesMock from 'components/GameCardSlider/mock'
+import highlightMock from 'components/Highlight/mock'
+import { renderWithTheme } from 'utils/tests/helpers'
+import { screen } from '@testing-library/react'
 
 const props: GameTemplateProps = {
   cover: 'bg-theme.jpg',
@@ -20,6 +19,7 @@ const props: GameTemplateProps = {
   details: detailsMock as GameDetailsProps,
   upcomingGames: gamesMock,
   upcominghighlight: highlightMock,
+  recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock
 }
 

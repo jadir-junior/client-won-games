@@ -1,23 +1,27 @@
+import * as S from './styles'
+
 import CartList, { CartListProps } from 'components/CartList'
-import { InformationCircle as InformationCircleIcon } from '@styled-icons/ionicons-outline/InformationCircle'
+import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
+
+import Base from 'templates/Base'
 import { Container } from 'components/Container'
 import { Divider } from 'components/Divider'
 import Empty from 'components/Empty'
 import { GameCardProps } from 'components/GameCard'
 import Heading from 'components/Heading'
 import { HighlightProps } from 'components/Highlight'
-import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
+import { InformationCircle as InformationCircleIcon } from '@styled-icons/ionicons-outline/InformationCircle'
 import Showcase from 'components/Showcase'
-import Base from 'templates/Base'
-import * as S from './styles'
 
 export type CartProps = {
+  recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 } & CartListProps &
   Pick<PaymentOptionsProps, 'cards'>
 
 const Cart = ({
+  recommendedTitle,
   recommendedGames,
   recommendedHighlight,
   items,
@@ -63,7 +67,7 @@ const Cart = ({
       </Container>
 
       <Showcase
-        title="You may like these games"
+        title={recommendedTitle}
         games={recommendedGames}
         highlight={recommendedHighlight}
         arrowColor="white"

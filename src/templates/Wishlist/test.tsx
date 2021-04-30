@@ -1,14 +1,14 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
-
-import gamesMock from 'components/GameCardSlider/mock'
-import hightlightMock from 'components/Highlight/mock'
 
 import Wishlist from '.'
+import gamesMock from 'components/GameCardSlider/mock'
+import hightlightMock from 'components/Highlight/mock'
+import { renderWithTheme } from 'utils/tests/helpers'
+import { screen } from '@testing-library/react'
 
 const props = {
   games: gamesMock,
+  recommendedTitle: 'You may like these games',
   recommededGames: gamesMock,
   recommededHighlight: hightlightMock
 }
@@ -52,6 +52,7 @@ describe('<Wishlist />', () => {
   it('should render a component Empty if games is not passed or array zero', () => {
     renderWithTheme(
       <Wishlist
+        recommendedTitle="You may like these games"
         recommededGames={props.recommededGames}
         recommededHighlight={props.recommededHighlight}
       />
