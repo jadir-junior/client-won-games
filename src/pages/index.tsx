@@ -2,7 +2,6 @@ import Home, { HomeTemplateProps } from 'templates/Home'
 
 import { QUERY_HOME } from 'graphql/queries/home'
 import { QueryHome } from 'graphql/generated/QueryHome'
-import highlightMock from 'components/Highlight/mock'
 import { initializeApollo } from 'utils/apollo'
 
 export default function Index(props: HomeTemplateProps) {
@@ -42,7 +41,15 @@ export async function getStaticProps() {
         price: game.price
       })),
       mostPopularTitle: sections?.popularGames?.title,
-      mostPopularHighLight: highlightMock,
+      mostPopularHighLight: {
+        title: sections?.popularGames?.highlight?.title,
+        subtitle: sections?.popularGames?.highlight?.subtitle,
+        backgroundImage: `http://localhost:1337${sections?.popularGames?.highlight?.background?.url}`,
+        floatImage: `http://localhost:1337${sections?.popularGames?.highlight?.floatImage?.url}`,
+        buttonLabel: sections?.popularGames?.highlight?.buttonLabel,
+        buttonLink: sections?.popularGames?.highlight?.buttonLink,
+        alignment: sections?.popularGames?.highlight?.alignment
+      },
       mostPopularGames: sections!.popularGames!.games.map((game) => ({
         title: game.name,
         slug: game.slug,
@@ -58,7 +65,15 @@ export async function getStaticProps() {
         developer: game.developers[0].name,
         price: game.price
       })),
-      upComingHighLight: highlightMock,
+      upComingHighLight: {
+        title: sections?.upcomingGames?.highlight?.title,
+        subtitle: sections?.upcomingGames?.highlight?.subtitle,
+        backgroundImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.background?.url}`,
+        floatImage: `http://localhost:1337${sections?.upcomingGames?.highlight?.floatImage?.url}`,
+        buttonLabel: sections?.upcomingGames?.highlight?.buttonLabel,
+        buttonLink: sections?.upcomingGames?.highlight?.buttonLink,
+        alignment: sections?.upcomingGames?.highlight?.alignment
+      },
       freeGamesTitle: sections?.freeGames?.title,
       freeGames: freeGames.map((game) => ({
         title: game.name,
@@ -67,7 +82,15 @@ export async function getStaticProps() {
         developer: game.developers[0].name,
         price: game.price
       })),
-      freeGamesHighLight: highlightMock
+      freeGamesHighLight: {
+        title: sections?.freeGames?.highlight?.title,
+        subtitle: sections?.freeGames?.highlight?.subtitle,
+        backgroundImage: `http://localhost:1337${sections?.freeGames?.highlight?.background?.url}`,
+        floatImage: `http://localhost:1337${sections?.freeGames?.highlight?.floatImage?.url}`,
+        buttonLabel: sections?.freeGames?.highlight?.buttonLabel,
+        buttonLink: sections?.freeGames?.highlight?.buttonLink,
+        alignment: sections?.freeGames?.highlight?.alignment
+      }
     }
   }
 }
