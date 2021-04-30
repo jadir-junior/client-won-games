@@ -4,13 +4,13 @@ import { HighligthFragment } from 'graphql/fragments/highlight'
 import { gql } from '@apollo/client'
 
 export const QUERY_HOME = gql`
-  query QueryHome {
+  query QueryHome($date: Date!) {
     banners {
       ...BannerFragment
     }
 
     newGames: games(
-      where: { release_date_lte: "2021-04-29" }
+      where: { release_date_lte: $date }
       sort: "release_date:desc"
       limit: 8
     ) {
@@ -18,7 +18,7 @@ export const QUERY_HOME = gql`
     }
 
     upComingGames: games(
-      where: { release_date_lte: "2021-04-29" }
+      where: { release_date_lte: $date }
       sort: "release_date:asc"
       limit: 8
     ) {
