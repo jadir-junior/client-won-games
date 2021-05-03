@@ -1,6 +1,7 @@
 import GamesTemplate from '.'
+import { MockedProvider } from '@apollo/client/testing'
+import { QUERY_GAMES } from 'graphql/queries/games'
 import filterItemsMock from 'components/ExploreSideBar/mock'
-import gamesMock from 'components/GameCardSlider/mock'
 import { renderWithTheme } from 'utils/tests/helpers'
 import { screen } from '@testing-library/react'
 
@@ -18,24 +19,61 @@ jest.mock('components/ExploreSideBar', () => ({
   }
 }))
 
-jest.mock('components/GameCard', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock GameCard" />
+const mocks = [
+  {
+    request: {
+      query: QUERY_GAMES,
+      variables: {
+        limit: 15
+      }
+    },
+    result: {
+      data: {
+        games: [
+          {
+            name: 'Time Loader',
+            slug: 'time-loader',
+            cover: {
+              url: '/uploads/time_loader_847dac5db1.jpg'
+            },
+            developers: [
+              {
+                name: 'Flazm'
+              }
+            ],
+            price: 554.99,
+            __typename: 'Game'
+          }
+        ]
+      }
+    }
   }
-}))
+]
 
 describe('<Games />', () => {
-  it('should render the sections', () => {
+  it('should render loading when starting the template', () => {
     renderWithTheme(
-      <GamesTemplate filterItems={filterItemsMock} games={[gamesMock[0]]} />
+      <MockedProvider mocks={[]} addTypename={false}>
+        <GamesTemplate filterItems={filterItemsMock} />
+      </MockedProvider>
     )
 
-    expect(screen.getByTestId('Mock ExploreSideBar')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument()
+  })
 
+  it('should render sections', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <GamesTemplate filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument()
+
+    expect(await screen.findByTestId('Mock ExploreSideBar')).toBeInTheDocument()
+    expect(await screen.findByText(/Time Loader/i)).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: /show more/i })
+      await screen.findByRole('button', { name: /show more/i })
     ).toBeInTheDocument()
   })
 })
