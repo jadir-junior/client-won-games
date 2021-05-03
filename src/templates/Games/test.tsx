@@ -1,9 +1,12 @@
+import { fetchMoreGames, gamesMock } from './mocks'
+
 import GamesTemplate from '.'
 import { MockedProvider } from '@apollo/client/testing'
-import { QUERY_GAMES } from 'graphql/queries/games'
+import apolloCache from 'utils/apolloCache'
 import filterItemsMock from 'components/ExploreSideBar/mock'
 import { renderWithTheme } from 'utils/tests/helpers'
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -19,37 +22,6 @@ jest.mock('components/ExploreSideBar', () => ({
   }
 }))
 
-const mocks = [
-  {
-    request: {
-      query: QUERY_GAMES,
-      variables: {
-        limit: 15
-      }
-    },
-    result: {
-      data: {
-        games: [
-          {
-            name: 'Time Loader',
-            slug: 'time-loader',
-            cover: {
-              url: '/uploads/time_loader_847dac5db1.jpg'
-            },
-            developers: [
-              {
-                name: 'Flazm'
-              }
-            ],
-            price: 554.99,
-            __typename: 'Game'
-          }
-        ]
-      }
-    }
-  }
-]
-
 describe('<Games />', () => {
   it('should render loading when starting the template', () => {
     renderWithTheme(
@@ -63,7 +35,7 @@ describe('<Games />', () => {
 
   it('should render sections', async () => {
     renderWithTheme(
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={[gamesMock]} addTypename={false}>
         <GamesTemplate filterItems={filterItemsMock} />
       </MockedProvider>
     )
@@ -75,5 +47,19 @@ describe('<Games />', () => {
     expect(
       await screen.findByRole('button', { name: /show more/i })
     ).toBeInTheDocument()
+  })
+
+  it('should render more games when show more is clicked', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[gamesMock, fetchMoreGames]} cache={apolloCache}>
+        <GamesTemplate filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText(/Time Loader/i)).toBeInTheDocument()
+
+    userEvent.click(await screen.findByRole('button', { name: /show more/i }))
+
+    expect(await screen.findByText(/Minute of Islands/i)).toBeInTheDocument()
   })
 })
