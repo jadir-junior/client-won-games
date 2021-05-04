@@ -4,7 +4,8 @@ export const gamesMock = {
   request: {
     query: QUERY_GAMES,
     variables: {
-      limit: 15
+      limit: 15,
+      where: {}
     }
   },
   result: {
@@ -34,6 +35,7 @@ export const fetchMoreGames = {
     query: QUERY_GAMES,
     variables: {
       limit: 15,
+      where: {},
       start: 1
     }
   },
