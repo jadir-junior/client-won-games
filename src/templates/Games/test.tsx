@@ -1,4 +1,4 @@
-import { fetchMoreGames, gamesMock } from './mocks'
+import { fetchMoreGames, gamesMock, noGamesMock } from './mocks'
 
 import GamesTemplate from '.'
 import { MockedProvider } from '@apollo/client/testing'
@@ -36,7 +36,7 @@ jest.mock('next/link', () => ({
 describe('<Games />', () => {
   it('should render empty when no games found', async () => {
     renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false}>
+      <MockedProvider mocks={[noGamesMock]} addTypename={false}>
         <GamesTemplate filterItems={filterItemsMock} />
       </MockedProvider>
     )
