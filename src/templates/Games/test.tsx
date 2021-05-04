@@ -34,16 +34,6 @@ jest.mock('next/link', () => ({
 }))
 
 describe('<Games />', () => {
-  it('should render loading when starting the template', () => {
-    renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false}>
-        <GamesTemplate filterItems={filterItemsMock} />
-      </MockedProvider>
-    )
-
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument()
-  })
-
   it('should render empty when no games found', async () => {
     renderWithTheme(
       <MockedProvider mocks={[]} addTypename={false}>
@@ -62,8 +52,6 @@ describe('<Games />', () => {
         <GamesTemplate filterItems={filterItemsMock} />
       </MockedProvider>
     )
-
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument()
 
     expect(await screen.findByText(/price/i)).toBeInTheDocument()
     expect(await screen.findByText(/Time Loader/i)).toBeInTheDocument()
