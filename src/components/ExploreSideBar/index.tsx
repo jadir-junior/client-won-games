@@ -74,7 +74,6 @@ const ExploreSideBar = ({
             <Heading lineBottom lineColor="secondary" size="small">
               {item.title}
             </Heading>
-
             {item.type === 'checkbox' &&
               item.fields.map((field) => (
                 <Checkbox
@@ -89,7 +88,6 @@ const ExploreSideBar = ({
                   onCheck={() => handleCheckbox(item.name, field.name)}
                 />
               ))}
-
             {item.type === 'radio' &&
               item.fields.map((field) => (
                 <Radio
@@ -100,7 +98,9 @@ const ExploreSideBar = ({
                   label={field.label}
                   labelFor={field.name}
                   labelColor="white"
-                  defaultChecked={field.name === values[item.name]}
+                  defaultChecked={
+                    String(field.name) === String(values[item.name])
+                  }
                   onChange={() => handleRadio(item.name, field.name)}
                 />
               ))}
