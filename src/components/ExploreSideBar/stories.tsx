@@ -7,7 +7,8 @@ export default {
   title: 'ExploreSideBar',
   component: ExploreSideBar,
   args: {
-    items
+    items,
+    onFilter: () => console.log('filter')
   },
   parameters: {
     backgrounds: {

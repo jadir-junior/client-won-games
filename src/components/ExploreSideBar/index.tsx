@@ -1,5 +1,7 @@
 import * as S from './styles'
 
+import { useEffect, useState } from 'react'
+
 import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import { Close } from '@styled-icons/material-outlined/Close'
@@ -7,7 +9,6 @@ import { FilterList } from '@styled-icons/material-outlined/FilterList'
 import Heading from 'components/Heading'
 import { ParsedUrlQueryInput } from 'querystring'
 import Radio from 'components/Radio'
-import { useState } from 'react'
 import { xor } from 'lodash'
 
 export type ItemProps = {
@@ -38,6 +39,11 @@ const ExploreSideBar = ({
   const [values, setValues] = useState(initialValues)
   const [isOpen, setIsOpen] = useState(false)
 
+  useEffect(() => {
+    onFilter(values)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
+
   const handleRadio = (name: string, value: string | boolean) => {
     setValues((previousValue) => ({ ...previousValue, [name]: value }))
   }
@@ -50,8 +56,7 @@ const ExploreSideBar = ({
     }))
   }
 
-  const handleFilter = () => {
-    onFilter(values)
+  const handleFilterMenu = () => {
     setIsOpen(false)
   }
 
@@ -104,7 +109,7 @@ const ExploreSideBar = ({
       </S.Content>
 
       <S.Footer>
-        <Button fullWidth size="medium" onClick={handleFilter}>
+        <Button fullWidth size="medium" onClick={handleFilterMenu}>
           Filter
         </Button>
       </S.Footer>
