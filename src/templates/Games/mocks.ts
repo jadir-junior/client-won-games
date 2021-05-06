@@ -31,6 +31,7 @@ export const gamesMock = {
     data: {
       games: [
         {
+          id: '1',
           name: 'Time Loader',
           slug: 'time-loader',
           cover: {
@@ -66,6 +67,7 @@ export const fetchMoreGames = {
     data: {
       games: [
         {
+          id: '2',
           name: 'Minute of Islands',
           slug: 'minute-of-islands',
           cover: {
