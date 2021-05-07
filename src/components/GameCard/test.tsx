@@ -12,6 +12,14 @@ const props = {
   price: 235
 }
 
+const gameFree = {
+  slug: 'population-zero',
+  title: 'Population Zero',
+  developer: 'Rockstar Games',
+  img: 'https://source.unsplash.com/user/willianjusten/300x140',
+  price: 0.0
+}
+
 describe('<GameCard />', () => {
   it('should render correctly', () => {
     renderWithTheme(<GameCard {...props} />)
@@ -89,5 +97,18 @@ describe('<GameCard />', () => {
       fontSize: '1.2rem',
       padding: '0 1.6rem'
     })
+  })
+
+  it('should show price with text free if price 0.00', () => {
+    renderWithTheme(
+      <GameCard
+        {...gameFree}
+        ribbon="My Ribbon"
+        ribbonColor="secondary"
+        ribbonSize="small"
+      />
+    )
+
+    expect(screen.getByText('FREE')).toBeInTheDocument()
   })
 })
