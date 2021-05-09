@@ -2,7 +2,7 @@ import {
   QueryHome_banners,
   QueryHome_sections_popularGames_highlight
 } from 'graphql/generated/QueryHome'
-import { bannerMapper, gamesMapper, highlightMapper } from '.'
+import { bannerMapper, cartMapper, gamesMapper, highlightMapper } from '.'
 
 import { QueryGames_games } from 'graphql/generated/QueryGames'
 
@@ -99,5 +99,37 @@ describe('highlightMapper()', () => {
       buttonLink: 'button-link',
       alignment: 'left'
     })
+  })
+})
+
+describe('cartMapper()', () => {
+  it('should return empty object if no highlight', () => {
+    expect(cartMapper(null)).toStrictEqual([])
+  })
+
+  it('should return the correct format when mapped', () => {
+    const game = {
+      id: '1',
+      name: 'game',
+      developers: [
+        {
+          name: 'developer'
+        }
+      ],
+      slug: 'game',
+      cover: {
+        url: '/image.jpg'
+      },
+      price: 10
+    } as QueryGames_games
+
+    expect(cartMapper([game])).toStrictEqual([
+      {
+        id: '1',
+        title: 'game',
+        img: 'http://localhost:1337/image.jpg',
+        price: '$10.00'
+      }
+    ])
   })
 })
