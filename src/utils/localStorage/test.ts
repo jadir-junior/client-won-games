@@ -1,6 +1,6 @@
-import { getLocalStorage, setLocalStorage } from '.'
+import { getStorageItem, setStorageItem } from '.'
 
-describe('getLocalStorage()', () => {
+describe('getStorageItem()', () => {
   beforeEach(() => {
     window.localStorage.clear()
   })
@@ -11,17 +11,17 @@ describe('getLocalStorage()', () => {
       JSON.stringify(['1', '2'])
     )
 
-    expect(getLocalStorage('cartItems')).toStrictEqual(['1', '2'])
+    expect(getStorageItem('cartItems')).toStrictEqual(['1', '2'])
   })
 })
 
-describe('setLocalStorage()', () => {
+describe('setStorageItem()', () => {
   beforeEach(() => {
     window.localStorage.clear()
   })
 
   it('should add the item to localStorage', () => {
-    setLocalStorage('cartItems', ['1', '2'])
+    setStorageItem('cartItems', ['1', '2'])
 
     expect(window.localStorage.getItem('WONGAMES_cartItems')).toStrictEqual(
       JSON.stringify(['1', '2'])
