@@ -1,12 +1,12 @@
 import 'match-media-mock'
 
+import { render, screen } from 'utils/test-utils'
+
 import Cart from '.'
 import cardsMock from 'components/PaymentOptions/mock'
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import itemsMock from 'components/CartList/mock'
-import { renderWithTheme } from 'utils/tests/helpers'
-import { screen } from '@testing-library/react'
 
 const props = {
   items: itemsMock,
@@ -54,13 +54,13 @@ jest.mock('components/Empty', () => ({
 
 describe('<Cart />', () => {
   it('should render the Cart', () => {
-    const { container } = renderWithTheme(<Cart {...props} />)
+    const { container } = render(<Cart {...props} />)
 
     expect(container.firstChild).toBeInTheDocument()
   })
 
   it('should render the components in template', () => {
-    renderWithTheme(<Cart {...props} />)
+    render(<Cart {...props} />)
 
     expect(screen.getByTestId(/mock base/i)).toBeInTheDocument()
     expect(
@@ -74,7 +74,7 @@ describe('<Cart />', () => {
   })
 
   it('should render the component empty if items is empty', () => {
-    renderWithTheme(<Cart {...props} items={[]} />)
+    render(<Cart {...props} items={[]} />)
 
     expect(screen.getByTestId(/mock empty/i)).toBeInTheDocument()
   })

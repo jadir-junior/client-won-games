@@ -1,10 +1,10 @@
 import 'match-media-mock'
 
+import { render, screen } from 'utils/test-utils'
+
 import Wishlist from '.'
 import gamesMock from 'components/GameCardSlider/mock'
 import hightlightMock from 'components/Highlight/mock'
-import { renderWithTheme } from 'utils/tests/helpers'
-import { screen } from '@testing-library/react'
 
 const props = {
   games: gamesMock,
@@ -36,7 +36,7 @@ jest.mock('components/Footer', () => ({
 
 describe('<Wishlist />', () => {
   it('should render the Wishlist template', () => {
-    renderWithTheme(<Wishlist {...props} />)
+    render(<Wishlist {...props} />)
 
     expect(screen.getByTestId(/mock menu/i)).toBeInTheDocument()
     expect(
@@ -50,7 +50,7 @@ describe('<Wishlist />', () => {
   })
 
   it('should render a component Empty if games is not passed or array zero', () => {
-    renderWithTheme(
+    render(
       <Wishlist
         recommendedTitle="You may like these games"
         recommededGames={props.recommededGames}
