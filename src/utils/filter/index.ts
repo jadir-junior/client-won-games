@@ -1,5 +1,5 @@
 import { ItemProps } from 'components/ExploreSideBar'
-import { ParsedUrlQueryInput } from 'node:querystring'
+import { ParsedUrlQueryInput } from 'querystring'
 
 type ParseArgs = {
   queryString: ParsedUrlQueryInput

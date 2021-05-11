@@ -8,7 +8,7 @@ import Empty from 'components/Empty'
 import GameCard from 'components/GameCard'
 import { Grid } from 'components/Grid'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
-import { ParsedUrlQueryInput } from 'node:querystring'
+import { ParsedUrlQueryInput } from 'querystring'
 import { useQueryGames } from 'graphql/queries/games'
 import { useRouter } from 'next/router'
 
