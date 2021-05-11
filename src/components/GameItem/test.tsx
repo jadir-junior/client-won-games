@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import GameItem from '.'
 
@@ -11,13 +10,13 @@ const props = {
 
 describe('<GameItem />', () => {
   it('should render the GameItem', () => {
-    const { container } = renderWithTheme(<GameItem {...props} />)
+    const { container } = render(<GameItem {...props} />)
 
     expect(container.firstChild).toBeInTheDocument()
   })
 
   it('should render game content item', () => {
-    renderWithTheme(<GameItem {...props} />)
+    render(<GameItem {...props} />)
 
     expect(
       screen.getByRole('img', { name: /red dead redemption 2/i })
@@ -31,7 +30,7 @@ describe('<GameItem />', () => {
   it('should render game item with link download', () => {
     const downloadLink = 'http://localhost:3000/download/1289102'
 
-    renderWithTheme(<GameItem {...props} downloadLink={downloadLink} />)
+    render(<GameItem {...props} downloadLink={downloadLink} />)
 
     expect(
       screen.getByRole('link', { name: `Get ${props.title} here` })
@@ -46,7 +45,7 @@ describe('<GameItem />', () => {
       purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
     }
 
-    renderWithTheme(<GameItem {...props} paymentInfo={paymentInfo} />)
+    render(<GameItem {...props} paymentInfo={paymentInfo} />)
 
     expect(screen.getByRole('img', { name: paymentInfo.flag })).toHaveAttribute(
       'src',

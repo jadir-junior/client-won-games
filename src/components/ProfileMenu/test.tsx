@@ -1,18 +1,17 @@
-import { screen } from '@testing-library/react'
-import theme from 'styles/theme'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import ProfileMenu from '.'
+import theme from 'styles/theme'
 
 describe('<ProfileMenu />', () => {
   it('should render the ProfileMenu', () => {
-    const { container } = renderWithTheme(<ProfileMenu />)
+    const { container } = render(<ProfileMenu />)
 
     expect(container.firstChild).toBeInTheDocument()
   })
 
   it('should render the 4 links of nav', () => {
-    renderWithTheme(<ProfileMenu />)
+    render(<ProfileMenu />)
 
     expect(
       screen.getByRole('link', { name: /my profile/i })
@@ -23,7 +22,7 @@ describe('<ProfileMenu />', () => {
   })
 
   it('should render a link active', () => {
-    renderWithTheme(<ProfileMenu activeLink="/profile/cards" />)
+    render(<ProfileMenu activeLink="/profile/cards" />)
 
     expect(screen.getByRole('link', { name: /my cards/i })).toHaveStyle({
       background: theme.colors.primary,

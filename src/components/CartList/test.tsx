@@ -1,11 +1,11 @@
+import { render, screen } from 'utils/test-utils'
+
 import CartList from '.'
 import mockCartListItems from './mock'
-import { renderWithTheme } from 'utils/tests/helpers'
-import { screen } from '@testing-library/react'
 
 describe('<CartList />', () => {
   it('should render the CardList', () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <CartList items={mockCartListItems} total="R$ 330,00" />
     )
 
@@ -13,13 +13,13 @@ describe('<CartList />', () => {
   })
 
   it('should render a card list with two items', () => {
-    renderWithTheme(<CartList items={mockCartListItems} total="R$ 330,00" />)
+    render(<CartList items={mockCartListItems} total="R$ 330,00" />)
 
     expect(screen.getAllByRole('heading')).toHaveLength(2)
   })
 
   it('should render a footer with total and total price', () => {
-    renderWithTheme(<CartList items={mockCartListItems} total="R$ 330,00" />)
+    render(<CartList items={mockCartListItems} total="R$ 330,00" />)
 
     expect(screen.getByText(/total/i)).toBeInTheDocument()
     expect(screen.getByText('R$ 330,00')).toBeInTheDocument()
@@ -29,16 +29,14 @@ describe('<CartList />', () => {
   })
 
   it('should render with a button', () => {
-    renderWithTheme(
-      <CartList items={mockCartListItems} total="R$ 330,00" hasButton />
-    )
+    render(<CartList items={mockCartListItems} total="R$ 330,00" hasButton />)
 
     expect(screen.getByText(/buy it now/i)).toBeInTheDocument()
     expect(screen.queryByText(/total/i)).not.toBeInTheDocument()
   })
 
   it('should render empty if there are no games', () => {
-    renderWithTheme(<CartList />)
+    render(<CartList />)
 
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
     expect(screen.queryByText(/total/i)).not.toBeInTheDocument()

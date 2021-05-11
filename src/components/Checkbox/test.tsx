@@ -1,18 +1,17 @@
-import { screen, waitFor } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
-import userEvent from '@testing-library/user-event'
+import { render, screen, waitFor } from 'utils/test-utils'
 
 import Checkbox from '.'
+import userEvent from '@testing-library/user-event'
 
 describe('<Checkbox />', () => {
   it('should render the Checkbox', () => {
-    const { container } = renderWithTheme(<Checkbox />)
+    const { container } = render(<Checkbox />)
 
     expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render the Checkbox and label', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
+    render(<Checkbox label="checkbox label" labelFor="check" />)
 
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByText(/checkbox label/i)).toBeInTheDocument()
@@ -20,13 +19,13 @@ describe('<Checkbox />', () => {
   })
 
   it('should not render label if label is not passed', () => {
-    renderWithTheme(<Checkbox labelFor="check" />)
+    render(<Checkbox labelFor="check" />)
 
     expect(screen.queryByLabelText('checkbox')).not.toBeInTheDocument()
   })
 
   it('should render a label with a white color', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="checkbox label" labelFor="check" labelColor="white" />
     )
 
@@ -38,7 +37,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox label="checkbox label" labelFor="check" onCheck={onCheck} />
     )
 
@@ -54,7 +53,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck when status isChecked', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(
+    render(
       <Checkbox
         label="checkbox label"
         labelFor="check"

@@ -1,17 +1,16 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import ProfileForm from '.'
 
 describe('<ProfileForm />', () => {
   it('should render the ProfileForm', () => {
-    const { container } = renderWithTheme(<ProfileForm />)
+    const { container } = render(<ProfileForm />)
 
     expect(container.firstChild).toBeInTheDocument()
   })
 
   it('should render all the component of the profile form', () => {
-    renderWithTheme(<ProfileForm />)
+    render(<ProfileForm />)
 
     expect(
       screen.getByRole('heading', { name: /my profile/i })

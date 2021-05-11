@@ -1,11 +1,10 @@
-import { fireEvent, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from 'utils/test-utils'
 
 import Menu from '.'
-import { renderWithTheme } from 'utils/tests/helpers'
 
 describe('<Menu />', () => {
   it('should render the menu', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
     const search = screen.getByLabelText(/search/i)
     const shoppingCart = screen.getAllByLabelText(/shopping cart/i)
     const logo = screen.getByLabelText(/won games/i)
@@ -18,7 +17,7 @@ describe('<Menu />', () => {
   })
 
   it('should handle the open/close mobile menu', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
     const menuIcon = screen.getByLabelText(/open menu/i)
     const closeMenuIcon = screen.getByLabelText(/close menu/i)
 
@@ -41,7 +40,7 @@ describe('<Menu />', () => {
   })
 
   it('should show registerBox if user is not logged', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
 
     const myAccount = screen.queryByText(/my profile/i)
     const wishlist = screen.queryByText('/wishlist/i')
@@ -55,7 +54,7 @@ describe('<Menu />', () => {
   })
 
   it('should show on menu nav wishlist and my account and register box hide', () => {
-    renderWithTheme(<Menu username="mick" />)
+    render(<Menu username="mick" />)
 
     const myAccount = screen.getAllByText(/my profile/i)
     const wishlist = screen.getAllByText(/wishlist/i)

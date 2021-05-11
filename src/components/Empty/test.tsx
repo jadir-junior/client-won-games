@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import Empty from '.'
 
@@ -10,13 +9,13 @@ const props = {
 
 describe('<Empty />', () => {
   it('should render the Empty', () => {
-    const { container } = renderWithTheme(<Empty {...props} hasLink />)
+    const { container } = render(<Empty {...props} hasLink />)
 
     expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render the Empty, image, title, description and button(link)', () => {
-    renderWithTheme(<Empty {...props} hasLink />)
+    render(<Empty {...props} hasLink />)
 
     expect(
       screen.getByRole('image', {
@@ -31,7 +30,7 @@ describe('<Empty />', () => {
   })
 
   it('should not render a link if hasnt', () => {
-    renderWithTheme(<Empty {...props} />)
+    render(<Empty {...props} />)
 
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })

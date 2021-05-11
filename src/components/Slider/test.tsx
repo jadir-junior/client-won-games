@@ -1,12 +1,12 @@
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+
+import { render, screen } from 'utils/test-utils'
 
 import Slider from '.'
 
 describe('<Slider />', () => {
   it('should render the Slider', () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <Slider settings={{ infinite: false, slidesToShow: 1 }}>
         <p>Item 1</p>
         <p>Item 2</p>
