@@ -1,16 +1,16 @@
-import { tint } from 'polished'
-import styled, { css, DefaultTheme } from 'styled-components'
-
 import * as ButtonStyles from 'components/Button/styles'
 
+import styled, { DefaultTheme, css } from 'styled-components'
+
+import { tint } from 'polished'
+
 export const Wrapper = styled.main`
-  ${({ theme }) => css`
-    background: ${theme.colors.white};
-  `}
+  ${({ theme }) => css``}
 `
 
 export const Body = styled.div`
   ${({ theme }) => css`
+    background: ${theme.colors.white};
     padding: ${theme.spacings.small};
   `}
 `
