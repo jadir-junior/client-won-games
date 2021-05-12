@@ -72,10 +72,4 @@ describe('<Cart />', () => {
     expect(screen.queryByTestId(/mock empty/i)).not.toBeInTheDocument()
     expect(screen.getByText(/your purchase is protected/i)).toBeInTheDocument()
   })
-
-  it('should render the component empty if items is empty', () => {
-    render(<Cart {...props} items={[]} />)
-
-    expect(screen.getByTestId(/mock empty/i)).toBeInTheDocument()
-  })
 })
