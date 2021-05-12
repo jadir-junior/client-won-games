@@ -75,3 +75,8 @@ export const Loading = styled.div`
     }
   `}
 `
+
+export const GameList = styled.div`
+  max-height: 40rem;
+  overflow-y: auto;
+`
