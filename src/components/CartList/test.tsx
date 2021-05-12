@@ -22,6 +22,17 @@ describe('<CartList />', () => {
     expect(screen.getAllByRole('heading')).toHaveLength(2)
   })
 
+  it('should render loading', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      loading: true
+    }
+
+    render(<CartList />, { cartProviderProps })
+
+    expect(screen.getByText(/loading/i)).toBeInTheDocument()
+  })
+
   it('should render a footer with total and total price', () => {
     const cartProviderProps = {
       ...CartContextDefaultValues,
