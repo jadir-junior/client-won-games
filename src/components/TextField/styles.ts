@@ -1,4 +1,5 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme, css } from 'styled-components'
+
 import { TextFieldProps } from '.'
 
 type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>
@@ -56,6 +57,12 @@ export const Input = styled.input<IconPositionProps>`
     border: 0;
     outline: none;
     width: 100%;
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 ${theme.spacings.small}
+      ${theme.colors.lightGray} inset;
+      filter: none;
+    }
   `}
 `
 
