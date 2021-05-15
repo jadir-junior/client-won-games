@@ -4,9 +4,7 @@ import styled, { DefaultTheme, css } from 'styled-components'
 
 import { tint } from 'polished'
 
-export const Wrapper = styled.main`
-  ${({ theme }) => css``}
-`
+export const Wrapper = styled.main``
 
 export const Body = styled.div`
   ${({ theme }) => css`
