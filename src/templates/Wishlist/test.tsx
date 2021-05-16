@@ -13,6 +13,13 @@ const props = {
   recommededHighlight: hightlightMock
 }
 
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Mock Base">{children}</div>
+  }
+}))
+
 jest.mock('components/Showcase', () => ({
   __esModule: true,
   default: function Mock() {
@@ -38,7 +45,6 @@ describe('<Wishlist />', () => {
   it('should render the Wishlist template', () => {
     render(<Wishlist {...props} />)
 
-    expect(screen.getByTestId(/mock menu/i)).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: /wishlist/i })
     ).toBeInTheDocument()
@@ -46,7 +52,6 @@ describe('<Wishlist />', () => {
       screen.getAllByRole('heading', { name: /population zero/i })
     ).toHaveLength(6)
     expect(screen.getByTestId(/mock showcase/i)).toBeInTheDocument()
-    expect(screen.getByTestId(/mock footer/i)).toBeInTheDocument()
   })
 
   it('should render a component Empty if games is not passed or array zero', () => {

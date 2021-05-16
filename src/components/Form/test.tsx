@@ -11,11 +11,11 @@ describe('<Form />', () => {
     )
 
     expect(container.firstChild).toMatchInlineSnapshot(`
-      .c0 .sc-bdfBwQ {
+      .c0 .sc-gsTCUz {
         margin: 0.8rem 0;
       }
 
-      .c0 .sc-gKsewC {
+      .c0 .sc-bdfBwQ {
         margin: 3.2rem auto 1.6rem;
       }
 
