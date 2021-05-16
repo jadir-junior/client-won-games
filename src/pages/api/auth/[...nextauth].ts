@@ -18,6 +18,7 @@ const options = {
       name: 'Sign-in',
       credentials: {},
       async authorize({ email, password }: AuthorizeProps) {
+        console.log(process.env.NEXT_PUBLIC_API_URL)
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
           {
@@ -59,4 +60,4 @@ const options = {
 const Auth = (req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, options)
 
-export { Auth }
+export default Auth
