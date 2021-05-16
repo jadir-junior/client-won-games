@@ -1,9 +1,9 @@
+import * as ButtonStyles from 'components/Button/styles'
+import * as TextFieldStyles from 'components/TextField/styles'
+
 import styled, { css } from 'styled-components'
 
 import { darken } from 'polished'
-
-import * as TextFieldStyles from 'components/TextField/styles'
-import * as ButtonStyles from 'components/Button/styles'
 
 export const FormWrapper = styled.div`
   ${({ theme }) => css`
@@ -32,4 +32,11 @@ export const FormLink = styled.div`
       }
     }
   `}
+`
+
+export const FormLoading = styled.img.attrs(() => ({
+  src: '/img/dots.svg',
+  alt: 'Waiting...'
+}))`
+  width: 4rem;
 `

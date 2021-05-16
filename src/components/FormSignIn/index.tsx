@@ -1,6 +1,6 @@
 import * as S from './styles'
 
-import { FormLink, FormWrapper } from 'components/Form'
+import { FormLink, FormLoading, FormWrapper } from 'components/Form'
 
 import Button from 'components/Button'
 import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
@@ -12,9 +12,9 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const FormSignIn = () => {
-  const routes = useRouter()
-  const { push } = routes
+  const { push } = useRouter()
   const [values, setValues] = useState({})
+  const [loading, setLoading] = useState(false)
 
   const handleInput = (field: string, value: string) => {
     setValues((state) => ({ ...state, [field]: value }))
@@ -22,6 +22,7 @@ const FormSignIn = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
+    setLoading(true)
 
     const result = await signIn('credentials', {
       ...values,
@@ -33,6 +34,7 @@ const FormSignIn = () => {
       return push(result?.url)
     }
 
+    setLoading(false)
     console.log('email ou senha invalida')
   }
 
@@ -55,8 +57,8 @@ const FormSignIn = () => {
         />
         <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
 
-        <Button type="submit" fullWidth size="large">
-          Sign in now
+        <Button type="submit" fullWidth size="large" disabled={loading}>
+          {loading ? <FormLoading /> : <span>Sign in now</span>}
         </Button>
 
         <FormLink>
