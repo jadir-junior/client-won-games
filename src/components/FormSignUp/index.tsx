@@ -1,15 +1,17 @@
 import { FieldErrors, signUpValidate } from 'utils/validations'
-import { FormLink, FormLoading, FormWrapper } from 'components/Form'
+import { FormError, FormLink, FormLoading, FormWrapper } from 'components/Form'
 import React, { useState } from 'react'
 
 import { AccountCircle as AccountCircleIcon } from '@styled-icons/material-outlined/AccountCircle'
 import Button from 'components/Button'
 import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
+import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
 import Link from 'next/link'
 import { Lock as LockIcon } from '@styled-icons/material-outlined/Lock'
 import { MUTATION_REGISTER } from 'graphql/mutations/register'
 import TextField from 'components/TextField'
 import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
+import { graphqlErrors } from 'utils/graphqlErrors'
 import { signIn } from 'next-auth/client'
 import { useMutation } from '@apollo/client'
 
@@ -25,9 +27,10 @@ const FormSignUp = () => {
     password: '',
     confirm_password: ''
   })
+  const [formError, setFormError] = useState('')
 
   const [createUser, { error, loading }] = useMutation(MUTATION_REGISTER, {
-    onError: (err) => console.error(err),
+    onError: (err) => setFormError(graphqlErrors(err)),
     onCompleted: () => {
       !error &&
         signIn('credentials', {
@@ -67,6 +70,12 @@ const FormSignUp = () => {
 
   return (
     <FormWrapper>
+      {!!formError && (
+        <FormError>
+          <ErrorOutline />
+          {formError}
+        </FormError>
+      )}
       <form onSubmit={handleSubmit}>
         <TextField
           name="username"
