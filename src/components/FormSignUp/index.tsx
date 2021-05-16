@@ -1,3 +1,4 @@
+import { FieldErrors, signUpValidate } from 'utils/validations'
 import { FormLink, FormLoading, FormWrapper } from 'components/Form'
 import React, { useState } from 'react'
 
@@ -17,6 +18,12 @@ const FormSignUp = () => {
     username: '',
     email: '',
     password: ''
+  })
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({
+    username: '',
+    email: '',
+    password: '',
+    confirm_password: ''
   })
 
   const [createUser, { error, loading }] = useMutation(MUTATION_REGISTER, {
@@ -38,6 +45,15 @@ const FormSignUp = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
+    const errors = signUpValidate(values)
+
+    if (Object.keys(errors).length) {
+      setFieldErrors(errors)
+      return
+    }
+
+    setFieldErrors({})
+
     createUser({
       variables: {
         input: {
@@ -53,9 +69,10 @@ const FormSignUp = () => {
     <FormWrapper>
       <form onSubmit={handleSubmit}>
         <TextField
-          name="usernamer"
+          name="username"
           placeholder="Username"
           type="text"
+          error={fieldErrors?.username}
           onInputChange={(value) => handleInput('username', value)}
           icon={<AccountCircleIcon />}
         />
@@ -63,6 +80,7 @@ const FormSignUp = () => {
           name="email"
           placeholder="email"
           type="email"
+          error={fieldErrors?.email}
           onInputChange={(value) => handleInput('email', value)}
           icon={<EmailIcon />}
         />
@@ -70,14 +88,16 @@ const FormSignUp = () => {
           name="password"
           placeholder="password"
           type="password"
+          error={fieldErrors?.password}
           onInputChange={(value) => handleInput('password', value)}
           icon={<LockIcon />}
         />
         <TextField
-          name="confirmPassword"
+          name="confirm_password"
           placeholder="Confirm password"
           type="password"
-          onInputChange={(value) => handleInput('confirmPassword', value)}
+          error={fieldErrors?.confirm_password}
+          onInputChange={(value) => handleInput('confirm_password', value)}
           icon={<LockIcon />}
         />
 
