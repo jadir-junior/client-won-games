@@ -22,9 +22,6 @@ jobs:
       - name: Test
         run: yarn test
 
-      - name: Build
-        run: yarn build
-
       - name: AutoMege DependaBot
         uses: ahmadnassri/action-dependabot-auto-merge@v2
         with:
