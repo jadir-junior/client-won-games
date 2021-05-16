@@ -13,7 +13,7 @@ import UserDropdown from 'components/UserDropdown'
 import { useState } from 'react'
 
 export type MenuProps = {
-  username?: string
+  username?: string | null
 }
 
 const Menu = ({ username }: MenuProps) => {
