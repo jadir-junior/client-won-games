@@ -1,9 +1,9 @@
+import { FieldErrors, forgotValidate } from 'utils/validations'
 import { FormError, FormLoading, FormWrapper } from 'components/Form'
 
 import Button from 'components/Button'
 import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
 import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
-import { FieldErrors } from 'utils/validations'
 import TextField from 'components/TextField'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
@@ -25,7 +25,7 @@ const FormForgetPassword = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = {}
+    const errors = forgotValidate(values)
 
     if (Object.keys(errors).length) {
       setFieldErrors(errors)
@@ -57,7 +57,7 @@ const FormForgetPassword = () => {
           {formError}
         </FormError>
       )}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <TextField
           name="email"
           placeholder="email"

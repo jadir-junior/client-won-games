@@ -1,8 +1,8 @@
+import { FieldErrors, resetValidate } from 'utils/validations'
 import { FormError, FormLoading, FormWrapper } from 'components/Form'
 
 import Button from 'components/Button'
 import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
-import { FieldErrors } from 'utils/validations'
 import { Lock as LockIcon } from '@styled-icons/material-outlined/Lock'
 import TextField from 'components/TextField'
 import { signIn } from 'next-auth/client'
@@ -25,7 +25,7 @@ const FormResetPassword = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = {}
+    const errors = resetValidate(values)
 
     if (Object.keys(errors).length) {
       setFieldErrors(errors)
