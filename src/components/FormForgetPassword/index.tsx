@@ -1,22 +1,20 @@
 import * as S from './styles'
 
-import { FieldErrors, signInValidate } from 'utils/validations'
-import { FormError, FormLink, FormLoading, FormWrapper } from 'components/Form'
+import { FormError, FormLoading, FormWrapper } from 'components/Form'
 
 import Button from 'components/Button'
 import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
 import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
-import Link from 'next/link'
-import { Lock as LockIcon } from '@styled-icons/material-outlined/Lock'
+import { FieldErrors } from 'utils/validations'
 import TextField from 'components/TextField'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-const FormSignIn = () => {
+const FormForgetPassword = () => {
   const routes = useRouter()
   const { push, query } = routes
-  const [values, setValues] = useState({ email: '', password: '' })
+  const [values, setValues] = useState({ email: '' })
   const [loading, setLoading] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const [formError, setFormError] = useState('')
@@ -29,7 +27,7 @@ const FormSignIn = () => {
     event.preventDefault()
     setLoading(true)
 
-    const errors = signInValidate(values)
+    const errors = {}
 
     if (Object.keys(errors).length) {
       setFieldErrors(errors)
@@ -70,32 +68,13 @@ const FormSignIn = () => {
           icon={<EmailIcon />}
           onInputChange={(value) => handleInput('email', value)}
         />
-        <TextField
-          name="password"
-          placeholder="password"
-          type="password"
-          error={fieldErrors?.password}
-          icon={<LockIcon />}
-          onInputChange={(value) => handleInput('password', value)}
-        />
-
-        <Link href="/forgot-password" passHref>
-          <S.ForgotPassword>Forgot your password?</S.ForgotPassword>
-        </Link>
 
         <Button type="submit" fullWidth size="large" disabled={loading}>
-          {loading ? <FormLoading /> : <span>Sign in now</span>}
+          {loading ? <FormLoading /> : <span>Send email</span>}
         </Button>
-
-        <FormLink>
-          Don’t have an account?{' '}
-          <Link href="/sign-up">
-            <a>Sign up</a>
-          </Link>
-        </FormLink>
       </form>
     </FormWrapper>
   )
 }
 
-export default FormSignIn
+export default FormForgetPassword
