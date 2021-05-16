@@ -1,4 +1,5 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme, css } from 'styled-components'
+
 import media from 'styled-media-query'
 
 export const Nav = styled.nav`
@@ -34,6 +35,7 @@ const linkModifiers = {
 
 export const Link = styled.a<LinkProps>`
   ${({ theme, isActive }) => css`
+    cursor: pointer;
     text-decoration: none;
     display: flex;
     align-items: center;

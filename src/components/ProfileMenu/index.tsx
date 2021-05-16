@@ -1,10 +1,11 @@
-import Link from 'next/link'
+import * as S from './styles'
+
 import { AccountCircle } from '@styled-icons/material-outlined/AccountCircle'
 import { CreditCard } from '@styled-icons/material-outlined/CreditCard'
-import { FormatListBulleted } from '@styled-icons/material-outlined/FormatListBulleted'
 import { ExitToApp } from '@styled-icons/material-outlined/ExitToApp'
-
-import * as S from './styles'
+import { FormatListBulleted } from '@styled-icons/material-outlined/FormatListBulleted'
+import Link from 'next/link'
+import { signOut } from 'next-auth/client'
 
 export type ProfileMenuProps = {
   activeLink?: '/profile/me' | '/profile/cards' | '/profile/orders' | string
@@ -33,12 +34,10 @@ const ProfileMenu = ({ activeLink }: ProfileMenuProps) => (
       </S.Link>
     </Link>
 
-    <Link href="/logout" passHref>
-      <S.Link>
-        <ExitToApp size={24} />
-        <span>Sign out</span>
-      </S.Link>
-    </Link>
+    <S.Link role="button" onClick={() => signOut()}>
+      <ExitToApp size={24} />
+      <span>Sign out</span>
+    </S.Link>
   </S.Nav>
 )
 
