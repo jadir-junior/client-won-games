@@ -1,18 +1,18 @@
 import { FormError, FormLoading, FormWrapper } from 'components/Form'
 
 import Button from 'components/Button'
-import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
 import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
 import { FieldErrors } from 'utils/validations'
+import { Lock as LockIcon } from '@styled-icons/material-outlined/Lock'
 import TextField from 'components/TextField'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-const FormForgetPassword = () => {
+const FormResetPassword = () => {
   const routes = useRouter()
   const { push, query } = routes
-  const [values, setValues] = useState({ email: '' })
+  const [values, setValues] = useState({ password: '', confirm_password: '' })
   const [loading, setLoading] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const [formError, setFormError] = useState('')
@@ -59,20 +59,28 @@ const FormForgetPassword = () => {
       )}
       <form onSubmit={handleSubmit}>
         <TextField
-          name="email"
-          placeholder="email"
-          type="email"
-          error={fieldErrors?.email}
-          icon={<EmailIcon />}
-          onInputChange={(value) => handleInput('email', value)}
+          name="password"
+          placeholder="password"
+          type="password"
+          error={fieldErrors?.password}
+          onInputChange={(value) => handleInput('password', value)}
+          icon={<LockIcon />}
+        />
+        <TextField
+          name="confirm_password"
+          placeholder="Confirm password"
+          type="password"
+          error={fieldErrors?.confirm_password}
+          onInputChange={(value) => handleInput('confirm_password', value)}
+          icon={<LockIcon />}
         />
 
         <Button type="submit" fullWidth size="large" disabled={loading}>
-          {loading ? <FormLoading /> : <span>Send email</span>}
+          {loading ? <FormLoading /> : <span>Reset password</span>}
         </Button>
       </form>
     </FormWrapper>
   )
 }
 
-export default FormForgetPassword
+export default FormResetPassword
