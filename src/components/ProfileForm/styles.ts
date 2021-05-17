@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+
 import media from 'styled-media-query'
 
 export const Wrapper = styled.main`
@@ -28,5 +29,14 @@ export const Form = styled.form`
             margin-top: 0;
         }
     `}
+  `}
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  ${media.greaterThan('medium')`
+        grid-column: 2;
   `}
 `

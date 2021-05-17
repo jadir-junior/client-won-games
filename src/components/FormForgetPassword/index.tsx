@@ -12,10 +12,12 @@ import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
 import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
 import TextField from 'components/TextField'
 import { forgotAndResetPasswordError } from 'utils/graphqlErrors'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const FormForgetPassword = () => {
-  const [values, setValues] = useState({ email: '' })
+  const { query } = useRouter()
+  const [values, setValues] = useState({ email: (query.email as string) || '' })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
@@ -81,6 +83,7 @@ const FormForgetPassword = () => {
               placeholder="email"
               type="email"
               error={fieldErrors?.email}
+              initialValue={query.email as string}
               icon={<EmailIcon />}
               onInputChange={(value) => handleInput('email', value)}
             />
