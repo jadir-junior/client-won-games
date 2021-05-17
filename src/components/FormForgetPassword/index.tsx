@@ -11,7 +11,7 @@ import { CheckCircleOutline } from '@styled-icons/material-outlined/CheckCircleO
 import { Email as EmailIcon } from '@styled-icons/material-outlined/Email'
 import { ErrorOutline } from '@styled-icons/material-outlined/ErrorOutline'
 import TextField from 'components/TextField'
-import { forgotPasswordError } from 'utils/graphqlErrors'
+import { forgotAndResetPasswordError } from 'utils/graphqlErrors'
 import { useState } from 'react'
 
 const FormForgetPassword = () => {
@@ -54,7 +54,7 @@ const FormForgetPassword = () => {
     setLoading(false)
 
     if (data.error) {
-      setFormError(forgotPasswordError(data))
+      setFormError(forgotAndResetPasswordError(data))
     } else {
       setSuccess(true)
     }
