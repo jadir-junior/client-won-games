@@ -4,3 +4,8 @@ export function graphqlErrors(error: ApolloError) {
   return error?.graphQLErrors[0]?.extensions?.exception.data.message[0]
     .messages[0].message
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function forgotPasswordError(error: any) {
+  return error?.message[0].messages[0].message
+}
