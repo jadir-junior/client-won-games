@@ -1,6 +1,7 @@
-import { darken } from 'polished'
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme, css } from 'styled-components'
+
 import { ButtonProps } from '.'
+import { darken } from 'polished'
 
 const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
@@ -61,8 +62,11 @@ export const Wrapper = styled.button<WrapperProps>`
     border-radius: ${theme.border.radius};
     padding: ${theme.spacings.xxsmall};
     cursor: pointer;
-    outline: 0;
     text-decoration: none;
+
+    &:focus {
+      outline: 1px dashed;
+    }
 
     &:hover {
       background: ${minimal
