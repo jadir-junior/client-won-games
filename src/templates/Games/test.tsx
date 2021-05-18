@@ -1,3 +1,5 @@
+import 'session.mock'
+
 import { fetchMoreGames, gamesMock, noGamesMock } from './mocks'
 import { render, screen } from 'utils/test-utils'
 

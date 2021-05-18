@@ -20,12 +20,15 @@ exports[`<Banner /> should render the Banner 1`] = `
   border-radius: 0.4rem;
   padding: 0.8rem;
   cursor: pointer;
-  outline: 0;
   -webkit-text-decoration: none;
   text-decoration: none;
   height: 4rem;
   font-size: 1.4rem;
   padding: 0.8rem 3.2rem;
+}
+
+.c5:focus {
+  outline: 1px dashed;
 }
 
 .c5:hover {
@@ -151,4 +154,4 @@ exports[`<Banner /> should render the Banner 1`] = `
     </a>
   </div>
 </div>
-`
+`;

@@ -20,13 +20,16 @@ exports[`<FormSignUp /> should render the FormSignUp 1`] = `
   border-radius: 0.4rem;
   padding: 0.8rem;
   cursor: pointer;
-  outline: 0;
   -webkit-text-decoration: none;
   text-decoration: none;
   height: 5rem;
   font-size: 1.6rem;
   padding: 0.8rem 4.8rem;
   width: 100%;
+}
+
+.c7:focus {
+  outline: 1px dashed;
 }
 
 .c7:hover {

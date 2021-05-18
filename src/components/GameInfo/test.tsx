@@ -1,3 +1,5 @@
+import 'session.mock'
+
 import { render, screen } from 'utils/test-utils'
 
 import GameInfo from '.'
