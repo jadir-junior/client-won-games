@@ -2,6 +2,7 @@ import Button, { ButtonProps } from 'components/Button'
 
 import { FavoriteBorder as FavoriteBorderIcon } from '@styled-icons/material-outlined/FavoriteBorder'
 import { Favorite as FavoriteIcon } from '@styled-icons/material-outlined/Favorite'
+import { removeWishlistMock } from 'hooks/use-wishlist/mock'
 import { useSession } from 'next-auth/client'
 import { useWishlist } from 'hooks/use-wishlist'
 
@@ -16,10 +17,14 @@ const WishlistButton = ({
   size = 'small'
 }: WishlistButtonProps) => {
   const [session] = useSession()
-  const { isInWishlist } = useWishlist()
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
+
   const buttonText = isInWishlist(id)
     ? 'Remove from Wishlist'
     : 'Add to Wishlist'
+
+  const handleClick = () =>
+    isInWishlist(id) ? removeFromWishlist(id) : addToWishlist(id)
 
   if (!session) return null
 
@@ -32,6 +37,7 @@ const WishlistButton = ({
           <FavoriteBorderIcon aria-label="Add to Wishlist" />
         )
       }
+      onClick={handleClick}
       minimal
       size={size}
     >
