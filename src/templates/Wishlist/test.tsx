@@ -4,6 +4,7 @@ import 'session.mock'
 import { render, screen } from 'utils/test-utils'
 
 import Wishlist from '.'
+import { WishlistContextDefaultValues } from 'hooks/use-wishlist'
 import gamesMock from 'components/GameCardSlider/mock'
 import hightlightMock from 'components/Highlight/mock'
 
@@ -44,24 +45,33 @@ jest.mock('components/Footer', () => ({
 
 describe('<Wishlist />', () => {
   it('should render the Wishlist template', () => {
-    render(<Wishlist {...props} />)
+    const wishlistProviderProps = {
+      ...WishlistContextDefaultValues,
+      items: [gamesMock[0]]
+    }
+
+    render(<Wishlist {...props} />, { wishlistProviderProps })
 
     expect(
       screen.getByRole('heading', { name: /wishlist/i })
     ).toBeInTheDocument()
-    expect(
-      screen.getAllByRole('heading', { name: /population zero/i })
-    ).toHaveLength(6)
+    expect(screen.getByText(/population zero/i)).toBeInTheDocument()
     expect(screen.getByTestId(/mock showcase/i)).toBeInTheDocument()
   })
 
   it('should render a component Empty if games is not passed or array zero', () => {
+    const wishlistProviderProps = {
+      ...WishlistContextDefaultValues,
+      items: []
+    }
+
     render(
       <Wishlist
         recommendedTitle="You may like these games"
         recommededGames={props.recommededGames}
         recommededHighlight={props.recommededHighlight}
-      />
+      />,
+      { wishlistProviderProps }
     )
 
     expect(
