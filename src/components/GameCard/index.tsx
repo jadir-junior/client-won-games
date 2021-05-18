@@ -4,6 +4,7 @@ import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 
 import { CartButton } from 'components/CartButton'
 import Link from 'next/link'
+import WishlistButton from 'components/WishlistButton'
 import formatPrice from 'utils/format-price'
 
 export type GameCardProps = {
@@ -14,11 +15,9 @@ export type GameCardProps = {
   img: string
   price: number
   promotionalPrice?: number
-  favorite?: boolean
   ribbon?: string
   ribbonColor?: RibbonColors
   ribbonSize?: RibbonSizes
-  onFav?: () => void
 }
 
 const GameCard = ({
@@ -29,11 +28,9 @@ const GameCard = ({
   img,
   price,
   promotionalPrice,
-  favorite = false,
   ribbon,
   ribbonColor,
-  ribbonSize,
-  onFav
+  ribbonSize
 }: GameCardProps) => (
   <S.Wrapper>
     {!!ribbon && (
@@ -53,9 +50,9 @@ const GameCard = ({
           <S.Developer>{developer}</S.Developer>
         </S.Info>
       </Link>
-      {/* <S.FavIcon role="button" onClick={onFav}>
-
-      </S.FavIcon> */}
+      <S.FavIcon>
+        <WishlistButton id={id} />
+      </S.FavIcon>
       <S.BuyBox>
         {!!promotionalPrice && (
           <S.Price isPromotional>{formatPrice(price)}</S.Price>

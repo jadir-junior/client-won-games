@@ -2,7 +2,6 @@ import Button, { ButtonProps } from 'components/Button'
 
 import { FavoriteBorder as FavoriteBorderIcon } from '@styled-icons/material-outlined/FavoriteBorder'
 import { Favorite as FavoriteIcon } from '@styled-icons/material-outlined/Favorite'
-import { removeWishlistMock } from 'hooks/use-wishlist/mock'
 import { useSession } from 'next-auth/client'
 import { useWishlist } from 'hooks/use-wishlist'
 
