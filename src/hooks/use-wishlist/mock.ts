@@ -4,7 +4,6 @@ import {
 } from 'graphql/mutations/wishlist'
 
 import { QUERY_WISHLIST } from 'graphql/queries/wishlist'
-import { gamesMock } from 'hooks/use-cart/mock'
 
 const gameMock = (id: string) => ({
   id,
