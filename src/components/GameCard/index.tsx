@@ -3,8 +3,6 @@ import * as S from './styles'
 import Ribbon, { RibbonColors, RibbonSizes } from 'components/Ribbon'
 
 import { CartButton } from 'components/CartButton'
-import { FavoriteBorder as FavoriteBorderIcon } from '@styled-icons/material-outlined/FavoriteBorder'
-import { Favorite as FavoriteIcon } from '@styled-icons/material-outlined/Favorite'
 import Link from 'next/link'
 import formatPrice from 'utils/format-price'
 
@@ -55,13 +53,9 @@ const GameCard = ({
           <S.Developer>{developer}</S.Developer>
         </S.Info>
       </Link>
-      <S.FavIcon role="button" onClick={onFav}>
-        {favorite ? (
-          <FavoriteIcon aria-label="Remove from Wishlist" />
-        ) : (
-          <FavoriteBorderIcon aria-label="Add to Wishlist" />
-        )}
-      </S.FavIcon>
+      {/* <S.FavIcon role="button" onClick={onFav}>
+
+      </S.FavIcon> */}
       <S.BuyBox>
         {!!promotionalPrice && (
           <S.Price isPromotional>{formatPrice(price)}</S.Price>
