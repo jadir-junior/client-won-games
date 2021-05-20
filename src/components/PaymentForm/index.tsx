@@ -1,10 +1,10 @@
 import * as S from './styles'
 
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
 import React, { useEffect, useState } from 'react'
 
 import Button from 'components/Button'
-import { CardElement } from '@stripe/react-stripe-js'
 import { FormLoading } from 'components/Form'
 import Heading from 'components/Heading'
 import { Session } from 'next-auth'
@@ -18,6 +18,9 @@ export type PaymentoFormProps = {
 
 const PaymentForm = ({ session }: PaymentoFormProps) => {
   const { items } = useCart()
+  const stripe = useStripe()
+  const elements = useElements()
+
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(true)
@@ -63,11 +66,32 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setLoading(true)
+
+    // se for freeGames
+    // salva no banco
+    // rediriciona para o success
+
+    const payload = await stripe!.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements!.getElement(CardElement)!
+      }
+    })
+    if (payload.error) {
+      setError(`Payment failed ${payload.error.message}`)
+      setLoading(false)
+    } else {
+      setError(null)
+      setLoading(false)
+      console.log('comprou')
+
+      // salvar a compra no banco do Strapi
+      // rediriciona para o pagina de Sucesso
+    }
   }
 
   return (
     <S.Wrapper>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <S.Body>
           <Heading color="black" size="small" lineBottom>
             Payment
@@ -97,6 +121,7 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
           </Button>
 
           <Button
+            type="submit"
             fullWidth
             icon={loading ? <FormLoading /> : <ShoppingCart />}
             disabled={!freeGames && (disabled || !!error)}
