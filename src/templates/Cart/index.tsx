@@ -5,18 +5,22 @@ import CartList, { CartListProps } from 'components/CartList'
 import Base from 'templates/Base'
 import { Container } from 'components/Container'
 import { Divider } from 'components/Divider'
+import { Elements } from '@stripe/react-stripe-js'
 import { GameCardProps } from 'components/GameCard'
 import Heading from 'components/Heading'
 import { HighlightProps } from 'components/Highlight'
 import { InformationCircle as InformationCircleIcon } from '@styled-icons/ionicons-outline/InformationCircle'
 import PaymentForm from 'components/PaymentForm'
 import Showcase from 'components/Showcase'
+import { loadStripe } from '@stripe/stripe-js'
 
 export type CartProps = {
   recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
 } & CartListProps
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 
 const Cart = ({
   recommendedTitle,
@@ -33,7 +37,9 @@ const Cart = ({
         <div>
           <S.Content>
             <CartList />
-            <PaymentForm />
+            <Elements stripe={stripe}>
+              <PaymentForm />
+            </Elements>
           </S.Content>
           <S.Term>
             <S.Icon>
