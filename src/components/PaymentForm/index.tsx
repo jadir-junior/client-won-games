@@ -6,10 +6,16 @@ import { useEffect, useState } from 'react'
 import Button from 'components/Button'
 import { CardElement } from '@stripe/react-stripe-js'
 import Heading from 'components/Heading'
+import { Session } from 'next-auth'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { createPaymentIntent } from 'utils/stripe/methods'
 import { useCart } from 'hooks/use-cart'
 
-const PaymentForm = () => {
+export type PaymentoFormProps = {
+  session: Session
+}
+
+const PaymentForm = ({ session }: PaymentoFormProps) => {
   const { items } = useCart()
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState(true)
@@ -17,17 +23,36 @@ const PaymentForm = () => {
   const [freeGames, setFreeGames] = useState(false)
 
   useEffect(() => {
-    if (items.length) {
-      // bater na API /orders/create-payment-intent
-      // enviar os items do carrinho
-      // se eu receber freeGames: true => setFreeGames
-      // faço o fluxo de jogo gratuito
-      // se eu receber um erro
-      // setError
-      // senão o paymentIntent foi valido
-      // setClientSecret
+    async function setPaymentMode() {
+      if (items.length) {
+        // bater na API /orders/create-payment-intent
+        // enviar os items do carrinho
+        const data = await createPaymentIntent({
+          items,
+          token: session.jwt as string
+        })
+        // se eu receber freeGames: true => setFreeGames
+        // faço o fluxo de jogo gratuito
+        if (data.freeGames) {
+          setFreeGames(true)
+          console.log(data.freeGames)
+          return
+        }
+        // se eu receber um erro
+        // setError
+        if (data.error) {
+          setError(error)
+          return
+        }
+        // senão o paymentIntent foi valido
+        // setClientSecret
+        setClientSecret(data.client_secret)
+        console.log(data.client_secret)
+      }
     }
-  }, [items])
+
+    setPaymentMode()
+  }, [items, session])
 
   const handleChange = async (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty)

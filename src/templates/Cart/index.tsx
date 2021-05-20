@@ -11,10 +11,12 @@ import Heading from 'components/Heading'
 import { HighlightProps } from 'components/Highlight'
 import { InformationCircle as InformationCircleIcon } from '@styled-icons/ionicons-outline/InformationCircle'
 import PaymentForm from 'components/PaymentForm'
+import { Session } from 'next-auth'
 import Showcase from 'components/Showcase'
 import { loadStripe } from '@stripe/stripe-js'
 
 export type CartProps = {
+  session: Session
   recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
@@ -25,7 +27,8 @@ const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 const Cart = ({
   recommendedTitle,
   recommendedGames,
-  recommendedHighlight
+  recommendedHighlight,
+  session
 }: CartProps) => {
   return (
     <Base>
@@ -38,7 +41,7 @@ const Cart = ({
           <S.Content>
             <CartList />
             <Elements stripe={stripe}>
-              <PaymentForm />
+              <PaymentForm session={session} />
             </Elements>
           </S.Content>
           <S.Term>
