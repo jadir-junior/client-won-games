@@ -1,7 +1,6 @@
 import * as S from './styles'
 
 import { AccountCircle } from '@styled-icons/material-outlined/AccountCircle'
-import { CreditCard } from '@styled-icons/material-outlined/CreditCard'
 import { ExitToApp } from '@styled-icons/material-outlined/ExitToApp'
 import { FormatListBulleted } from '@styled-icons/material-outlined/FormatListBulleted'
 import Link from 'next/link'
@@ -17,13 +16,6 @@ const ProfileMenu = ({ activeLink }: ProfileMenuProps) => (
       <S.Link isActive={activeLink === '/profile/me'}>
         <AccountCircle size={24} />
         <span>My profile</span>
-      </S.Link>
-    </Link>
-
-    <Link href="/profile/cards" passHref>
-      <S.Link isActive={activeLink === '/profile/cards'}>
-        <CreditCard size={24} />
-        <span>My cards</span>
       </S.Link>
     </Link>
 
