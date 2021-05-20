@@ -1,16 +1,33 @@
 import * as S from './styles'
 
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
+import { useEffect, useState } from 'react'
 
 import Button from 'components/Button'
 import { CardElement } from '@stripe/react-stripe-js'
 import Heading from 'components/Heading'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
-import { useState } from 'react'
+import { useCart } from 'hooks/use-cart'
 
 const PaymentForm = () => {
+  const { items } = useCart()
   const [error, setError] = useState<string | null>(null)
   const [disabled, setDisabled] = useState(true)
+  const [clientSecret, setClientSecret] = useState('')
+  const [freeGames, setFreeGames] = useState(false)
+
+  useEffect(() => {
+    if (items.length) {
+      // bater na API /orders/create-payment-intent
+      // enviar os items do carrinho
+      // se eu receber freeGames: true => setFreeGames
+      // faço o fluxo de jogo gratuito
+      // se eu receber um erro
+      // setError
+      // senão o paymentIntent foi valido
+      // setClientSecret
+    }
+  }, [items])
 
   const handleChange = async (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty)
