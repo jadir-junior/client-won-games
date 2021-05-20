@@ -45,6 +45,7 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
         }
         // senão o paymentIntent foi valido
         // setClientSecret
+        setFreeGames(false)
         setClientSecret(data.client_secret)
       }
     }
