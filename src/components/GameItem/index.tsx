@@ -3,7 +3,7 @@ import * as S from './styles'
 import { Download as DownloadIcon } from '@styled-icons/boxicons-solid/Download'
 import { useCart } from 'hooks/use-cart'
 
-export type PaymenteInfoProps = {
+export type PaymentInfoProps = {
   number: string
   flag: string
   img: string
@@ -16,7 +16,7 @@ export type GameItemProps = {
   title: string
   price: string
   downloadLink?: string
-  paymentInfo?: PaymenteInfoProps
+  paymentInfo?: PaymentInfoProps
 }
 
 const GameItem = ({
@@ -62,7 +62,9 @@ const GameItem = ({
           <p>{paymentInfo.purchaseDate}</p>
           <S.CardInfo>
             <span>{paymentInfo.number}</span>
-            <img src={paymentInfo.img} alt={paymentInfo.flag} />
+            {paymentInfo.img && (
+              <img src={paymentInfo.img} alt={paymentInfo.flag} />
+            )}
           </S.CardInfo>
         </S.PaymentContent>
       )}
