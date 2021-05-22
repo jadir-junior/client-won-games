@@ -102,7 +102,6 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
       } else {
         setError(null)
         setLoading(false)
-        console.log('comprou')
 
         // salvar a compra no banco do Strapi
         // bater na API /orders
