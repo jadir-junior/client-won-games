@@ -3,13 +3,14 @@ import * as S from './styles'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
 import React, { useEffect, useState } from 'react'
+import { createPayment, createPaymentIntent } from 'utils/stripe/methods'
 
 import Button from 'components/Button'
 import { FormLoading } from 'components/Form'
 import Heading from 'components/Heading'
+import { PaymentIntent } from '@stripe/stripe-js'
 import { Session } from 'next-auth'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
-import { createPaymentIntent } from 'utils/stripe/methods'
 import { useCart } from 'hooks/use-cart'
 import { useRouter } from 'next/router'
 
@@ -65,37 +66,53 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
     setError(event.error ? event.error.message : '')
   }
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault()
-    setLoading(true)
-
-    // se for freeGames
-    if (freeGames) {
-      // salva no banco
-      // bater na API /orders
-
-      // rediriciona para o success
-      push('/success')
-    }
-
-    const payload = await stripe!.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements!.getElement(CardElement)!
-      }
+  const saveOrder = async (paymentIntent?: PaymentIntent) => {
+    const data = await createPayment({
+      items,
+      paymentIntent,
+      token: session.jwt as string
     })
-    if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`)
-      setLoading(false)
-    } else {
-      setError(null)
-      setLoading(false)
-      console.log('comprou')
 
-      // salvar a compra no banco do Strapi
-      // bater na API /orders
+    return data
+  }
 
-      // rediriciona para o pagina de Sucesso
-      push('/success')
+  const handleSubmit = async (event: React.FormEvent) => {
+    try {
+      event.preventDefault()
+      setLoading(true)
+
+      // se for freeGames
+      if (freeGames) {
+        // salva no banco
+        // bater na API /orders
+        await saveOrder()
+
+        // rediriciona para o success
+        push('/success')
+      }
+
+      const payload = await stripe!.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements!.getElement(CardElement)!
+        }
+      })
+      if (payload.error) {
+        setError(`Payment failed ${payload.error.message}`)
+        setLoading(false)
+      } else {
+        setError(null)
+        setLoading(false)
+        console.log('comprou')
+
+        // salvar a compra no banco do Strapi
+        // bater na API /orders
+        await saveOrder(payload.paymentIntent)
+
+        // rediriciona para o pagina de Sucesso
+        push('/success')
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
