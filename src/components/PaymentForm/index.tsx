@@ -8,6 +8,7 @@ import { createPayment, createPaymentIntent } from 'utils/stripe/methods'
 import Button from 'components/Button'
 import { FormLoading } from 'components/Form'
 import Heading from 'components/Heading'
+import Link from 'next/link'
 import { PaymentIntent } from '@stripe/stripe-js'
 import { Session } from 'next-auth'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
@@ -49,12 +50,12 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
         // setError
         if (data.error) {
           setError(error)
-          return
+        } else {
+          // senão o paymentIntent foi valido
+          // setClientSecret
+          setFreeGames(false)
+          setClientSecret(data.client_secret)
         }
-        // senão o paymentIntent foi valido
-        // setClientSecret
-        setFreeGames(false)
-        setClientSecret(data.client_secret)
       }
     }
 
@@ -142,9 +143,11 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
           )}
         </S.Body>
         <S.Footer>
-          <Button as="a" fullWidth minimal>
-            Continue shopping
-          </Button>
+          <Link href="/" passHref>
+            <Button as="a" fullWidth minimal>
+              Continue shopping
+            </Button>
+          </Link>
 
           <Button
             type="submit"
