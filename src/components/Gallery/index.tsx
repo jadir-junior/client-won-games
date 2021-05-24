@@ -1,12 +1,13 @@
-import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
-import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
-import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
-import SlickSlider from 'react-slick'
+import * as S from './styles'
 
 import Slider, { SliderSettings } from 'components/Slider'
 import { useEffect, useRef, useState } from 'react'
 
-import * as S from './styles'
+import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
+import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
+import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
+import Image from 'next/image'
+import SlickSlider from 'react-slick'
 
 const commonSliderSettings: SliderSettings = {
   arrows: true,
@@ -79,7 +80,9 @@ const Gallery = ({ items }: GalleryProps) => {
     <S.Wrapper>
       <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
-          <img
+          <Image
+            width={295}
+            height={165}
             role="button"
             src={item.src}
             alt={`Thumb - ${item.label}`}
@@ -104,7 +107,13 @@ const Gallery = ({ items }: GalleryProps) => {
         <S.Content>
           <Slider ref={slider} settings={modalSliderSettings}>
             {items.map((item, index) => (
-              <img key={`gallery-${index}`} src={item.src} alt={item.label} />
+              <Image
+                width={1200}
+                height={675}
+                key={`gallery-${index}`}
+                src={item.src}
+                alt={item.label}
+              />
             ))}
           </Slider>
         </S.Content>
