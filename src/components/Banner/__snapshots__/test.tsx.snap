@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Banner /> should render the Banner 1`] = `
+.c0 {
+  position: relative;
+}
+
+.c1 {
+  width: 100%;
+  height: 23rem;
+  background-color: #EAEAEA;
+}
+
+.c2 {
+  width: 100%;
+  background-color: rgba(0,0,0,0.7);
+  padding: 2.4rem;
+}
+
+.c3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #FAFAFA;
+}
+
+.c4 {
+  color: #FAFAFA;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1.6rem;
+}
+
+.c4 strong {
+  color: #F231A5;
+  font-weight: 600;
+}
+
 .c5 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -35,49 +69,12 @@ exports[`<Banner /> should render the Banner 1`] = `
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
 
-.c0 {
-  position: relative;
-}
-
-.c1 {
-  width: 100%;
-  height: 23rem;
-  background-color: #EAEAEA;
-  background-image: url(https://source.unsplash.com/user/willianjusten/1042x580);
-  background-position: center center;
-  background-size: cover;
-}
-
-.c2 {
-  width: 100%;
-  background-color: rgba(0,0,0,0.7);
-  padding: 2.4rem;
-}
-
-.c3 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #FAFAFA;
-}
-
-.c4 {
-  color: #FAFAFA;
-  font-size: 1.4rem;
-  font-weight: 400;
-  margin-bottom: 1.6rem;
-}
-
-.c4 strong {
-  color: #F231A5;
-  font-weight: 600;
-}
-
 @media (max-width:1170px) {
-  .c0 .sc-gsTCUz {
+  .c0 .sc-bdfBwQ {
     right: 0;
   }
 
-  .c0 .sc-gsTCUz::before {
+  .c0 .sc-bdfBwQ::before {
     display: none;
   }
 }
@@ -120,11 +117,14 @@ exports[`<Banner /> should render the Banner 1`] = `
   class="c0"
 >
   <div
-    aria-label="Defy death"
     class="c1"
-    role="img"
-    src="https://source.unsplash.com/user/willianjusten/1042x580"
-  />
+  >
+    <img
+      alt="Defy death"
+      layout="fill"
+      src="https://source.unsplash.com/user/willianjusten/1042x580"
+    />
+  </div>
   <div
     class="c2"
   >
