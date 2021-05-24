@@ -8,6 +8,7 @@ import Base from 'templates/Base'
 import { Divider } from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
+import Image from 'next/image'
 import Showcase from 'components/Showcase'
 import TextContent from 'components/TextContent'
 
@@ -37,7 +38,9 @@ const Game = ({
   recommendedGames
 }: GameTemplateProps) => (
   <Base>
-    <S.Cover src={cover} aria-label="cover" role="image" />
+    <S.Cover>
+      <Image src={cover} alt={gameInfo.title} layout="fill" />
+    </S.Cover>
 
     <S.Main>
       <S.SectionGameInfo>
