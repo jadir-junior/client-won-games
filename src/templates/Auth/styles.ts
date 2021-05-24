@@ -1,8 +1,9 @@
-import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
-
 import * as HeadingStyles from 'components/Heading/styles'
 import * as LogoStyles from 'components/Logo/styles'
+
+import styled, { css } from 'styled-components'
+
+import media from 'styled-media-query'
 
 export const Wrapper = styled.main`
   display: grid;
@@ -16,9 +17,6 @@ export const Wrapper = styled.main`
 export const BannerBlock = styled.div`
   ${({ theme }) => css`
     position: relative;
-    background-image: url(/img/auth-bg.jpg);
-    background-size: cover;
-    background-position: center center;
     padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
       ${theme.spacings.large};
 
