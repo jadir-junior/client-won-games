@@ -88,7 +88,7 @@ describe('<PaymentForm />', () => {
     })
   })
 
-  xit('should call createPayment when it renders and render error if has any issue', async () => {
+  it('should call createPayment when it renders and render error if has any issue', async () => {
     createPaymentIntent.mockResolvedValueOnce({ error: 'Error message' })
 
     render(<PaymentForm session={session} />, { cartProviderProps })

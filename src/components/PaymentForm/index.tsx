@@ -49,7 +49,7 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
         // se eu receber um erro
         // setError
         if (data.error) {
-          setError(error)
+          setError(data.error)
         } else {
           // senão o paymentIntent foi valido
           // setClientSecret
@@ -60,7 +60,6 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
     }
 
     setPaymentMode()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, session])
 
   const handleChange = async (event: StripeCardElementChangeEvent) => {
