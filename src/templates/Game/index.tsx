@@ -9,10 +9,12 @@ import { Divider } from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
 import Image from 'next/image'
+import { NextSeo } from 'next-seo'
 import Showcase from 'components/Showcase'
 import TextContent from 'components/TextContent'
 
 export type GameTemplateProps = {
+  slug?: string
   cover: string
   gameInfo: GameInfoProps
   gallery?: GalleryImageProps[]
@@ -26,6 +28,7 @@ export type GameTemplateProps = {
 }
 
 const Game = ({
+  slug,
   cover,
   gameInfo,
   gallery,
@@ -38,6 +41,23 @@ const Game = ({
   recommendedGames
 }: GameTemplateProps) => (
   <Base>
+    <NextSeo
+      title={`${gameInfo.title} - Won Games`}
+      description={`${gameInfo.description}`}
+      canonical={`https://wongames.jadirjunior.com.br/game/${slug}`}
+      openGraph={{
+        url: `https://wongames.jadirjunior.com.br/game/${slug}`,
+        title: `${gameInfo.title} - Won Games`,
+        description: gameInfo.description,
+        images: [
+          {
+            url: cover,
+            alt: `${gameInfo.title}`
+          }
+        ]
+      }}
+    />
+
     <S.Cover>
       <Image src={cover} alt={gameInfo.title} layout="fill" />
     </S.Cover>

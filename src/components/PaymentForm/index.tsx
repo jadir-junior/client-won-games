@@ -60,6 +60,7 @@ const PaymentForm = ({ session }: PaymentoFormProps) => {
     }
 
     setPaymentMode()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, session])
 
   const handleChange = async (event: StripeCardElementChangeEvent) => {
