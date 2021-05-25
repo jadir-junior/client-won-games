@@ -9,6 +9,7 @@ import GameCard from 'components/GameCard'
 import { Grid } from 'components/Grid'
 import { KeyboardArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 import { ParsedUrlQueryInput } from 'querystring'
+import { getImageUrl } from 'utils/getImageUrl'
 import { useQueryGames } from 'graphql/queries/games'
 import { useRouter } from 'next/router'
 
@@ -69,7 +70,7 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
-                    img={`http://localhost:1337${game.cover?.url}`}
+                    img={`${getImageUrl(game.cover?.url)}`}
                     price={game.price}
                   />
                 ))}
