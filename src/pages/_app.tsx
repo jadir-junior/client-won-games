@@ -2,9 +2,11 @@ import { ApolloProvider } from '@apollo/client'
 import { AppProps } from 'next/app'
 import { Provider as AuthProvider } from 'next-auth/client'
 import { CartProvider } from 'hooks/use-cart'
+import { DefaultSeo } from 'next-seo'
 import GlobalStyles from 'styles/global'
 import Head from 'next/head'
 import NextNprogress from 'nextjs-progressbar'
+import SEO from '../../next-seo.config'
 import { ThemeProvider } from 'styled-components'
 import { WishlistProvider } from 'hooks/use-wishlist'
 import theme from 'styles/theme'
@@ -29,6 +31,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
                 />
               </Head>
+              <DefaultSeo {...SEO} />
               <GlobalStyles />
               <NextNprogress
                 color="#F231A5"
