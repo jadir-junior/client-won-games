@@ -1,5 +1,8 @@
-import styled, { css } from 'styled-components'
 import * as HeadingStyles from 'components/Heading/styles'
+
+import styled, { css } from 'styled-components'
+
+import { darken } from 'polished'
 import media from 'styled-media-query'
 
 export const Wrapper = styled.footer`
@@ -25,7 +28,7 @@ export const Column = styled.div`
     a,
     span {
       display: block;
-      color: ${theme.colors.gray};
+      color: ${darken(0.2, theme.colors.gray)};
       text-decoration: none;
       margin-bottom: ${theme.spacings.xxsmall};
       font-size: ${theme.font.sizes.small};
