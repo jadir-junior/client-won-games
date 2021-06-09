@@ -18,9 +18,9 @@ describe('Explore', () => {
     cy.findByRole('heading', { name: /platforms/i }).should('exist')
     cy.findByRole('heading', { name: /genres/i }).should('exist')
 
-    cy.shouldRenderFields(sortFields)
-    cy.shouldRenderFields(priceFields)
-    cy.shouldRenderFields(platformsFields)
-    cy.shouldRenderFields(genreFields)
+    cy.getFields(sortFields)
+    cy.getFields(priceFields)
+    cy.getFields(platformsFields)
+    cy.getFields(genreFields)
   })
 })

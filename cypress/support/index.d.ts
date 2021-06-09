@@ -6,7 +6,7 @@ type ShowcaseAttributes = {
   highlight?: boolean
 }
 
-type field = {
+type FieldsAttributes = {
   label: string
   name: string | number
 }
@@ -38,9 +38,9 @@ declare namespace Cypress {
     shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
 
     /**
-     * Custom command to check field in page
-     * @example cy.shouldRenderFields()
+     * Custom command to get fields by label
+     * @example cy.getFields([{label: 'foo', name: 'foo}])
      */
-    shouldRenderFields(fields: field[]): Chainable<Element>
+    getFields(fields: FieldsAttributes[]): Chainable<Element>
   }
 }
