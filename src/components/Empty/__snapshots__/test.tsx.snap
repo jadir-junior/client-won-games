@@ -68,6 +68,7 @@ exports[`<Empty /> should render the Empty 1`] = `
 
 <main
   class="c0"
+  data-cy="empty"
 >
   <img
     alt="a gamer in a couch playing videogame"
@@ -94,4 +95,4 @@ exports[`<Empty /> should render the Empty 1`] = `
     </span>
   </a>
 </main>
-`;
+`

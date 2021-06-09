@@ -1,9 +1,11 @@
 /// <reference path="../support/index.d.ts" />
 
 describe('Game Page', () => {
-  it('should render game page sections', () => {
+  before(() => {
     cy.visit('/game/stellaris-nemesis')
+  })
 
+  it('should render game page sections', () => {
     cy.getByDataCy('game-info').within(() => {
       cy.findByRole('heading', { name: /stellaris: nemesis/i }).should('exist')
       cy.findByText(/^Nemesis is an expansion/i).should('exist')
@@ -50,5 +52,35 @@ describe('Game Page', () => {
       name: 'You may like these games',
       highlight: false
     })
+  })
+
+  it('should add/remove game in cart', () => {
+    // add to cart
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /add to cart/i }).click()
+      cy.findByRole('button', { name: /remove from cart/i }).should('exist')
+    })
+
+    cy.findAllByLabelText(/cart items/i)
+      .first()
+      .should('have.text', 1)
+      .click()
+
+    cy.getByDataCy('cart-list').within(() => {
+      cy.findByRole('heading', { name: /stellaris: nemesis/i }).should('exist')
+    })
+
+    // close dropown
+    cy.findAllByLabelText(/cart items/i)
+      .first()
+      .click()
+
+    // remove from cart
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /remove from cart/i }).click()
+      cy.findByRole('button', { name: /add to cart/i }).should('exist')
+    })
+
+    cy.findAllByLabelText(/cart items/i).should('not.exist')
   })
 })

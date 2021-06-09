@@ -11,7 +11,7 @@ export type EmptyProps = {
 }
 
 const Empty = ({ title, description, hasLink }: EmptyProps) => (
-  <S.Wrapper>
+  <S.Wrapper data-cy="empty">
     <Image
       src="/img/empty.svg"
       alt="a gamer in a couch playing videogame"
