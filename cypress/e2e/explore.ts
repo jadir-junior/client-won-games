@@ -48,7 +48,7 @@ describe('Explore', () => {
     cy.getByDataCy('game-card')
       .first()
       .within(() => {
-        cy.findByText(/free/i).should('not.exist')
+        cy.shouldBeGreaterThan(0)
       })
   })
 })
