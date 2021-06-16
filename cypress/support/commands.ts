@@ -97,3 +97,13 @@ Cypress.Commands.add('signUp', (user) => {
 
   cy.findByRole('button', { name: /sign up now/i }).click()
 })
+
+Cypress.Commands.add(
+  'signIn',
+  (email = 'e2e@wongames.com', password = '123456') => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/sign-in`)
+    cy.findAllByPlaceholderText(/email/i).type(email)
+    cy.findAllByPlaceholderText(/password/i).type(password)
+    cy.findByRole('button', { name: /sign in now/i }).click()
+  }
+)
