@@ -45,7 +45,7 @@
     "lodash.xor": "^4.5.0",
     "next": "10.2.3",
     "next-auth": "^3.27.1",
-    "next-pwa": "^5.2.21",
+    "next-pwa": "^5.2.22",
     "next-seo": "^4.26.0",
     "nextjs-progressbar": "^0.0.11",
     "polished": "^4.1.3",
